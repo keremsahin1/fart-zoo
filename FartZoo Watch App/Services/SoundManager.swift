@@ -1,8 +1,9 @@
 import AVFoundation
 import WatchKit
 
-class SoundManager: ObservableObject {
+class SoundManager {
     static let shared = SoundManager()
+    private init() {}
     private var player: AVAudioPlayer?
 
     func play(soundFile: String) {

@@ -1,0 +1,33 @@
+name: FartZoo
+options:
+  bundleIdPrefix: com.fartzoo
+  deploymentTarget:
+    watchOS: "10.0"
+  createIntermediateGroups: true
+
+targets:
+  FartZoo Watch App:
+    type: application
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: FartZoo Watch App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.fartzoo.watchkitapp
+        SWIFT_VERSION: 5.9
+        WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        TARGETED_DEVICE_FAMILY: "4"
+
+  FartZooTests:
+    type: bundle.unit-test
+    platform: watchOS
+    deploymentTarget: "10.0"
+    sources:
+      - path: FartZooTests
+    dependencies:
+      - target: FartZoo Watch App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.fartzoo.tests
+        SWIFT_VERSION: 5.9

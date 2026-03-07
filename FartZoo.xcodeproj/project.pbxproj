@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		722DDDAC44FC74A502251916 /* FartZooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84E28BA31C87C7CA0C9C10 /* FartZooApp.swift */; };
+		AD6B89F4C94DFAC3C89F2D68 /* FartZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D767CF31F89897AD79C91290 /* FartZooTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F1C5A7ED241DA6166B35F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A7363F67BB0FECE925C7A09 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A13E4F346C1FED22E94F835C;
+			remoteInfo = "FartZoo Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E3B9E2DCBD8BF6BDB908016 /* FartZooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FartZooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D767CF31F89897AD79C91290 /* FartZooTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartZooTests.swift; sourceTree = "<group>"; };
+		EB84E28BA31C87C7CA0C9C10 /* FartZooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartZooApp.swift; sourceTree = "<group>"; };
+		F4E6B1F85D1A479B8E9C15D5 /* FartZoo Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FartZoo Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		037913D71D9125806478EB83 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4E6B1F85D1A479B8E9C15D5 /* FartZoo Watch App.app */,
+				1E3B9E2DCBD8BF6BDB908016 /* FartZooTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E50AA95A0943B445CEC9494 = {
+			isa = PBXGroup;
+			children = (
+				CB787DB0FD9B7D99392201DC /* FartZoo Watch App */,
+				655041BBDB262E1F764DF106 /* FartZooTests */,
+				037913D71D9125806478EB83 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		655041BBDB262E1F764DF106 /* FartZooTests */ = {
+			isa = PBXGroup;
+			children = (
+				D767CF31F89897AD79C91290 /* FartZooTests.swift */,
+			);
+			path = FartZooTests;
+			sourceTree = "<group>";
+		};
+		70530963C64FDC4BF61BEA4A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CB787DB0FD9B7D99392201DC /* FartZoo Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				EB84E28BA31C87C7CA0C9C10 /* FartZooApp.swift */,
+				70530963C64FDC4BF61BEA4A /* Resources */,
+			);
+			path = "FartZoo Watch App";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A13E4F346C1FED22E94F835C /* FartZoo Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91FF1BC6E32DEB157A719565 /* Build configuration list for PBXNativeTarget "FartZoo Watch App" */;
+			buildPhases = (
+				6225DC98B898E61F5670FF4E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FartZoo Watch App";
+			packageProductDependencies = (
+			);
+			productName = "FartZoo Watch App";
+			productReference = F4E6B1F85D1A479B8E9C15D5 /* FartZoo Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F8C844763F3C832CDCABA3A2 /* FartZooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69D90D91D203999506653596 /* Build configuration list for PBXNativeTarget "FartZooTests" */;
+			buildPhases = (
+				FB82F3AE66D7A94395420174 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4718BF3268F2933EA49AC8E5 /* PBXTargetDependency */,
+			);
+			name = FartZooTests;
+			packageProductDependencies = (
+			);
+			productName = FartZooTests;
+			productReference = 1E3B9E2DCBD8BF6BDB908016 /* FartZooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9A7363F67BB0FECE925C7A09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 169059B5F10FCF077A45639E /* Build configuration list for PBXProject "FartZoo" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1E50AA95A0943B445CEC9494;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 037913D71D9125806478EB83 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A13E4F346C1FED22E94F835C /* FartZoo Watch App */,
+				F8C844763F3C832CDCABA3A2 /* FartZooTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6225DC98B898E61F5670FF4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				722DDDAC44FC74A502251916 /* FartZooApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB82F3AE66D7A94395420174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6B89F4C94DFAC3C89F2D68 /* FartZooTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4718BF3268F2933EA49AC8E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A13E4F346C1FED22E94F835C /* FartZoo Watch App */;
+			targetProxy = 1F1C5A7ED241DA6166B35F90 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		09EF8C51F1DF323AA1636793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		24D4BC1B72DB3E8ED349D71A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fartzoo.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		500AE0A7867CCF0183700C26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		6EEF986D3D5296044F3FEA78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.fartzoo.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FartZoo Watch App.app/FartZoo Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		B15BB2D8FBBA8ED3CCD78D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fartzoo.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		D0E7266785EAEA603BBE1747 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.fartzoo.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FartZoo Watch App.app/FartZoo Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		169059B5F10FCF077A45639E /* Build configuration list for PBXProject "FartZoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				500AE0A7867CCF0183700C26 /* Debug */,
+				09EF8C51F1DF323AA1636793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		69D90D91D203999506653596 /* Build configuration list for PBXNativeTarget "FartZooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EEF986D3D5296044F3FEA78 /* Debug */,
+				D0E7266785EAEA603BBE1747 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		91FF1BC6E32DEB157A719565 /* Build configuration list for PBXNativeTarget "FartZoo Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24D4BC1B72DB3E8ED349D71A /* Debug */,
+				B15BB2D8FBBA8ED3CCD78D0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9A7363F67BB0FECE925C7A09 /* Project object */;
+}

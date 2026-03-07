@@ -1,6 +1,7 @@
 # Fart Zoo
 
 ![Tests](https://github.com/keremsahin1/fart-zoo/actions/workflows/test.yml/badge.svg)
+[![codecov](https://codecov.io/gh/keremsahin1/fart-zoo/graph/badge.svg)](https://codecov.io/gh/keremsahin1/fart-zoo)
 
 A standalone Apple Watch game where kids teleport around the world, catch farting animals, and combine them into silly hybrids.
 

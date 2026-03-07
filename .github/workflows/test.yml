@@ -18,10 +18,23 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build and test
+      - name: Build and test with coverage
         run: |
           xcodebuild test \
             -project FartZoo.xcodeproj \
             -scheme "FartZoo Watch App" \
             -destination 'platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)' \
+            -enableCodeCoverage YES \
             -resultBundlePath TestResults.xcresult
+
+      - name: Convert coverage to JSON
+        run: |
+          xcrun xcresulttool get --path TestResults.xcresult \
+            --format json --type codeCoverage > coverage.json
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.json
+          flags: watchos
+          fail_ci_if_error: false

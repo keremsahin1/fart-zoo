@@ -37,11 +37,11 @@ class CollectedHybrid {
 class PlayerProgress {
     var coins: Int
     var lastDailyChallengeDate: Date?
-    var dailyChallengeCompleted: Bool
+    var dailyChallengesCompletedMask: Int  // bitmask: bit i set = challenge i completed today
 
     init() {
         self.coins = 50
         self.lastDailyChallengeDate = nil
-        self.dailyChallengeCompleted = false
+        self.dailyChallengesCompletedMask = 0
     }
 }

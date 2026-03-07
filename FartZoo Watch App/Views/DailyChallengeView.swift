@@ -5,49 +5,68 @@ struct DailyChallengeView: View {
     @Environment(DailyChallengeViewModel.self) private var vm
 
     var body: some View {
-        VStack(spacing: 8) {
-            Text("Daily Challenge").font(.headline)
-
-            if vm.completed {
-                VStack(spacing: 6) {
-                    Text("✅").font(.largeTitle)
-                    Text("Done for today!").font(.headline)
-                    Text("Come back tomorrow").font(.caption).foregroundStyle(.secondary)
-                    Text("+🪙 \(vm.challenge.coinReward) earned").foregroundStyle(.yellow)
+        ScrollView {
+            VStack(spacing: 6) {
+                ForEach(Array(vm.challenges.enumerated()), id: \.offset) { index, challenge in
+                    challengeRow(index: index, challenge: challenge)
                 }
+            }
+            .padding(.horizontal, 4)
+            .padding(.vertical, 6)
+        }
+    }
+
+    private func challengeRow(index: Int, challenge: DailyChallenge) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(alignment: .top) {
+                Text(vm.isCompleted(index) ? "✅" : typeEmoji(challenge.type))
+                    .font(.caption)
+                Text(challenge.description)
+                    .font(.caption2)
+                    .lineLimit(2)
+                Spacer()
+                Text("🪙\(challenge.coinReward)")
+                    .font(.caption2)
+                    .foregroundStyle(.yellow)
+            }
+
+            if vm.isCompleted(index) {
+                Text("Done!")
+                    .font(.caption2)
+                    .foregroundStyle(.green)
             } else {
-                VStack(spacing: 6) {
-                    Text(vm.challenge.description)
-                        .font(.caption)
-                        .multilineTextAlignment(.center)
-
-                    ProgressView(value: vm.progressFraction)
-
-                    Text("\(vm.progress) / \(vm.challenge.target)")
-                        .font(.caption)
-
-                    Text("Reward: 🪙 \(vm.challenge.coinReward)")
-                        .font(.caption)
-                        .foregroundStyle(.yellow)
-
-                    Text("FREE — no coins needed")
+                ProgressView(value: vm.progressFraction(for: index))
+                    .tint(progressColor(vm.progressFraction(for: index)))
+                HStack {
+                    Text("\(vm.progressValues[index]) / \(challenge.target)")
                         .font(.caption2)
-                        .foregroundStyle(.green)
-
-                    if vm.challenge.type == .fartAnimals {
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    if challenge.type == .fartAnimals {
                         Button("Fart! 💨") {
                             vm.recordFart(playerProgress: playerProgress)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.green)
-                    } else {
-                        Text("Go play to make progress!")
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
+                        .font(.caption2)
+                        .buttonStyle(.bordered)
                     }
                 }
             }
         }
-        .padding()
+        .padding(6)
+        .background(vm.isCompleted(index) ? Color.green.opacity(0.12) : Color.secondary.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func typeEmoji(_ type: DailyChallengeType) -> String {
+        switch type {
+        case .fartAnimals:  return "💨"
+        case .teleport:     return "🌍"
+        case .catchAnimals: return "🎯"
+        case .makeHybrid:   return "🧪"
+        }
+    }
+
+    private func progressColor(_ fraction: Double) -> Color {
+        fraction >= 1 ? .green : fraction >= 0.5 ? .yellow : .blue
     }
 }

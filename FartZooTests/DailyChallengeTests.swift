@@ -3,42 +3,47 @@ import XCTest
 
 final class DailyChallengeTests: XCTestCase {
 
-    func test_same_day_returns_same_challenge_type() {
+    func test_same_day_returns_same_challenges() {
         let date = Date()
-        let c1 = DailyChallenge.forDate(date)
-        let c2 = DailyChallenge.forDate(date)
-        XCTAssertEqual(c1.type, c2.type)
+        let c1 = DailyChallenge.allForDate(date)
+        let c2 = DailyChallenge.allForDate(date)
+        XCTAssertEqual(c1.map { $0.type }, c2.map { $0.type })
     }
 
-    func test_challenge_has_positive_reward() {
-        let challenge = DailyChallenge.forDate(Date())
-        XCTAssertGreaterThan(challenge.coinReward, 0)
+    func test_returns_exactly_5_challenges() {
+        XCTAssertEqual(DailyChallenge.allForDate(Date()).count, 5)
     }
 
-    func test_challenge_has_positive_target() {
-        let challenge = DailyChallenge.forDate(Date())
-        XCTAssertGreaterThan(challenge.target, 0)
-    }
-
-    func test_challenge_description_not_empty() {
-        let challenge = DailyChallenge.forDate(Date())
-        XCTAssertFalse(challenge.description.isEmpty)
-    }
-
-    func test_all_challenge_types_are_reachable() {
-        // Verify that iterating through year days covers all challenge types
-        let calendar = Calendar.current
-        let today = Date()
-        var foundTypes = Set<DailyChallengeType>()
-
-        for dayOffset in 0..<(DailyChallengeType.allCases.count) {
-            if let date = calendar.date(byAdding: .day, value: dayOffset, to: today) {
-                let challenge = DailyChallenge.forDate(date)
-                foundTypes.insert(challenge.type)
-            }
+    func test_all_challenges_have_positive_reward() {
+        for challenge in DailyChallenge.allForDate(Date()) {
+            XCTAssertGreaterThan(challenge.coinReward, 0)
         }
+    }
 
-        XCTAssertEqual(foundTypes.count, DailyChallengeType.allCases.count,
-            "All challenge types should be reachable within \(DailyChallengeType.allCases.count) days")
+    func test_all_challenges_have_positive_target() {
+        for challenge in DailyChallenge.allForDate(Date()) {
+            XCTAssertGreaterThan(challenge.target, 0)
+        }
+    }
+
+    func test_all_challenges_have_non_empty_description() {
+        for challenge in DailyChallenge.allForDate(Date()) {
+            XCTAssertFalse(challenge.description.isEmpty)
+        }
+    }
+
+    func test_different_days_return_different_challenges() {
+        let today = Date()
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+        let todayChallenges = DailyChallenge.allForDate(today).map { $0.description }
+        let tomorrowChallenges = DailyChallenge.allForDate(tomorrow).map { $0.description }
+        XCTAssertNotEqual(todayChallenges, tomorrowChallenges)
+    }
+
+    func test_pool_has_all_challenge_types() {
+        let types = Set(DailyChallenge.pool.map { $0.type })
+        for type in DailyChallengeType.allCases {
+            XCTAssertTrue(types.contains(type), "Pool missing challenge type: \(type)")
+        }
     }
 }

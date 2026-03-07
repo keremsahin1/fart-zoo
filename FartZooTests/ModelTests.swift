@@ -28,11 +28,14 @@ final class ModelTests: XCTestCase {
         XCTAssertEqual(name, "Dogish")
     }
 
-    func test_daily_challenge_returns_valid_challenge() {
-        let challenge = DailyChallenge.forDate(Date())
-        XCTAssertGreaterThan(challenge.coinReward, 0)
-        XCTAssertGreaterThan(challenge.target, 0)
-        XCTAssertFalse(challenge.description.isEmpty)
+    func test_daily_challenge_returns_valid_challenges() {
+        let challenges = DailyChallenge.allForDate(Date())
+        XCTAssertEqual(challenges.count, 5)
+        for challenge in challenges {
+            XCTAssertGreaterThan(challenge.coinReward, 0)
+            XCTAssertGreaterThan(challenge.target, 0)
+            XCTAssertFalse(challenge.description.isEmpty)
+        }
     }
 
     func test_world_location_random_returns_valid_location() {

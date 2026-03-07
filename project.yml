@@ -5,6 +5,23 @@ options:
     watchOS: "10.0"
   createIntermediateGroups: true
 
+schemes:
+  FartZoo Watch App:
+    build:
+      targets:
+        FartZoo Watch App: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - name: FartZooTests
+          parallelizable: true
+    profile:
+      config: Release
+    archive:
+      config: Release
+
 targets:
   FartZoo Watch App:
     type: application

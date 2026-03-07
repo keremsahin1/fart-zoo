@@ -24,16 +24,25 @@ jobs:
       - name: Find watch simulator
         id: simulator
         run: |
-          DEST=$(xcodebuild -scheme "FartZoo Watch App" -showdestinations 2>/dev/null | grep 'watchOS Simulator' | head -1 | sed 's/.*{ //' | sed 's/ }$//')
-          echo "destination=$DEST" >> "$GITHUB_OUTPUT"
-          echo "Using: $DEST"
+          SIMULATOR=$(xcrun simctl list devices available watchOS -j | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          for runtime, devices in data['devices'].items():
+              if 'watchOS' in runtime:
+                  for d in devices:
+                      if d['isAvailable']:
+                          print(d['name'])
+                          sys.exit(0)
+          " 2>/dev/null || echo "")
+          echo "simulator=$SIMULATOR" >> "$GITHUB_OUTPUT"
+          echo "Using simulator: $SIMULATOR"
 
       - name: Build and test with coverage
         run: |
           xcodebuild test \
             -project FartZoo.xcodeproj \
             -scheme "FartZoo Watch App" \
-            -destination '${{ steps.simulator.outputs.destination }}' \
+            -destination 'platform=watchOS Simulator,name=${{ steps.simulator.outputs.simulator }}' \
             -enableCodeCoverage YES \
             -resultBundlePath TestResults.xcresult
 

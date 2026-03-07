@@ -3,6 +3,7 @@ import SwiftUI
 struct TeleportView: View {
     let playerProgress: PlayerProgress
     @State private var vm = TeleportViewModel()
+    @State private var globeRotation: Double = 0
     @Environment(\.modelContext) private var context
 
     var body: some View {
@@ -11,6 +12,12 @@ struct TeleportView: View {
                 VStack {
                     Text("🌍")
                         .font(.largeTitle)
+                        .rotationEffect(.degrees(globeRotation))
+                        .onAppear {
+                            withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
+                                globeRotation = 360
+                            }
+                        }
                     Text("Teleporting...")
                         .font(.caption)
                 }

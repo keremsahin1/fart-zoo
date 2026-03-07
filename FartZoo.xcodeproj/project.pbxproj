@@ -21,6 +21,7 @@
 		49D34A10459A8BA2F3DE123E /* DailyChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EB7D8695AFC421457BDC6 /* DailyChallengeViewModel.swift */; };
 		53E3553A3BD79B78C331AAB5 /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35C9273CE461B61E858ADD0 /* QuestView.swift */; };
 		58BED11386DF38B6421B99FF /* fart_extinct_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 94B720AA2B26944CA730AEA7 /* fart_extinct_2.wav */; };
+		5D183F3DA4A47D4903D1EB19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB69140C042D36435CFA101 /* Assets.xcassets */; };
 		6DAAC064AE527767264461B8 /* QuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDFBCF87C908314C0FCEF6 /* QuestTests.swift */; };
 		6F52379445204592263B8F0F /* fart_legendary_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 71C400A2DAB385320AF3419F /* fart_legendary_2.wav */; };
 		71B164786B6498E86B5905F9 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17ECE21879E5A1940C724A93 /* README.txt */; };
@@ -70,6 +71,7 @@
 		329F4C92454BAD0075D776E5 /* QuestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewModel.swift; sourceTree = "<group>"; };
 		3732AD46C8B70650B21E3F8C /* fart_rare_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_rare_3.wav; sourceTree = "<group>"; };
 		3D628A23A40A29C710BE9E7E /* AnimalDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDatabase.swift; sourceTree = "<group>"; };
+		3EB69140C042D36435CFA101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47D3237DFBA4FB008291014D /* FartChefTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartChefTests.swift; sourceTree = "<group>"; };
 		486EB7D8695AFC421457BDC6 /* DailyChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengeViewModel.swift; sourceTree = "<group>"; };
 		4BFB1ACECB87FA4F4DD64A9C /* fart_common_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_common_1.wav; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		CB787DB0FD9B7D99392201DC /* FartZoo Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				3EB69140C042D36435CFA101 /* Assets.xcassets */,
 				EB84E28BA31C87C7CA0C9C10 /* FartZooApp.swift */,
 				944551323950CF5AA464504F /* Data */,
 				465A0A6C12DB6C01514E73C3 /* Models */,
@@ -308,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D183F3DA4A47D4903D1EB19 /* Assets.xcassets in Resources */,
 				71B164786B6498E86B5905F9 /* README.txt in Resources */,
 				7E95424687A164CE5367D93A /* fart_common_1.wav in Resources */,
 				E8FE0C98C09389FC3A79946E /* fart_common_2.wav in Resources */,

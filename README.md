@@ -1,0 +1,71 @@
+# Fart Zoo
+
+A standalone Apple Watch game where kids teleport around the world, catch farting animals, and combine them into silly hybrids.
+
+Built by a father-son duo for maximum laughs.
+
+## How to Play
+
+1. **Teleport** — Spin the globe and land in a random location (Amazon Rainforest, Arctic, Prehistoric World, and more)
+2. **Catch** — Pick an animal, pay coins, and tap as fast as you can to catch it before time runs out
+3. **Collect** — Build your zoo with 41 animals across 5 rarity tiers
+4. **Mix** — Use the Fart Chef to combine two animals into a silly hybrid (Dog + Fish = Dogish)
+5. **Challenge** — Complete 5 rotating daily challenges to earn free coins
+
+## Rarity Tiers
+
+| Tier | Examples | Difficulty |
+|------|----------|-----------|
+| Common | Dog, Cow, Chicken | Easy |
+| Uncommon | Flamingo, Fox, Koala | Medium |
+| Rare | Snow Leopard, Narwhal, Lion | Hard |
+| Legendary | Shark, Axolotl, White Rhino | Very Hard |
+| Extinct | T-Rex, Mammoth, Velociraptor | Hardest |
+
+The rarer an animal is in real life, the harder the quest to catch it.
+
+## Features
+
+- **Fart Zoo** — Tap any collected animal to hear it fart
+- **Teleport** — Random world locations with native animals
+- **Quest Mini-Challenges** — Tap-based challenges that scale with rarity
+- **Fart Chef** — Mix two animals to create hybrid creatures with unique names
+- **Daily Challenges** — 5 free challenges per day that rotate from a pool of 10
+- **Coin Economy** — Earn coins by catching animals and completing challenges; spend coins to attempt quests (lost on failure)
+
+## Tech Stack
+
+- Swift 5.9+ / watchOS 10+
+- SwiftUI
+- SwiftData (persistence)
+- AVFoundation (sound playback)
+- xcodegen (project generation)
+
+## Getting Started
+
+```bash
+# Clone the repo
+git clone https://github.com/keremsahin1/fart-zoo.git
+cd fart-zoo
+
+# Generate the Xcode project (requires xcodegen)
+brew install xcodegen
+xcodegen generate
+
+# Open in Xcode
+open FartZoo.xcodeproj
+```
+
+Select an Apple Watch simulator and press Cmd+R to run.
+
+### Sound Files
+
+The repo includes placeholder `.wav` files. Replace them with real fart sound recordings in `FartZoo Watch App/Resources/Sounds/`. Free sound effects can be found at [freesound.org](https://freesound.org).
+
+## Future Plans
+
+- Multiplayer (Fart Duel, Trading, Co-op Teleport)
+- More animals (100+ target)
+- More quest mini-challenge types
+- Animated animal sprites
+- iCloud sync

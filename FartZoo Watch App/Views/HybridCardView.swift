@@ -12,6 +12,11 @@ struct HybridCardView: View {
                 Text(hybrid.name)
                     .font(.caption2)
                     .lineLimit(1)
+                if hybrid.count > 1 {
+                    Text("x\(hybrid.count)")
+                        .font(.caption2)
+                        .foregroundStyle(.yellow)
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(6)

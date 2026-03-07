@@ -33,6 +33,16 @@ final class FartChefTests: XCTestCase {
         XCTAssertFalse(id1 != id2, "Same animal IDs should not be combinable")
     }
 
+    func test_collected_hybrid_has_count_defaulting_to_one() {
+        // Regression: duplicate hybrids were inserted as separate rows instead
+        // of incrementing count on the existing entry.
+        let hybrid = CollectedHybrid(hybridID: "cat_x_dog", name: "Catog", emoji: "🐈🐕",
+                                     parent1ID: "cat", parent2ID: "dog")
+        XCTAssertEqual(hybrid.count, 1, "New hybrid should start with count 1")
+        hybrid.count += 1
+        XCTAssertEqual(hybrid.count, 2, "Hybrid count should be incrementable")
+    }
+
     func test_hybrid_name_is_not_empty() {
         for animal1 in ["Dog", "Cat", "Cow", "Elephant", "T-Rex"] {
             for animal2 in ["Fish", "Shark", "Fox", "Bear"] {

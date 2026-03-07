@@ -21,6 +21,7 @@ class CollectedHybrid {
     var emoji: String
     var parent1ID: String
     var parent2ID: String
+    var count: Int
     var createdAt: Date
 
     init(hybridID: String, name: String, emoji: String, parent1ID: String, parent2ID: String) {
@@ -29,6 +30,7 @@ class CollectedHybrid {
         self.emoji = emoji
         self.parent1ID = parent1ID
         self.parent2ID = parent2ID
+        self.count = 1
         self.createdAt = Date()
     }
 }

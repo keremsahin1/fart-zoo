@@ -47,6 +47,11 @@ struct FartChefView: View {
                             Text(hybrid.emoji)
                             Text(hybrid.name).font(.caption)
                             Spacer()
+                            if hybrid.count > 1 {
+                                Text("x\(hybrid.count)")
+                                    .font(.caption2)
+                                    .foregroundStyle(.yellow)
+                            }
                         }
                     }
                 }
@@ -84,12 +89,18 @@ struct FartChefView: View {
               let def2 = AnimalDatabase.shared.animal(id: id2) else { return }
 
         let hybridID = HybridAnimal.hybridID(parent1ID: id1, parent2ID: id2)
-        let name = HybridAnimal.hybridName(parent1: def1.name, parent2: def2.name)
-        let emoji = def1.emoji + def2.emoji
 
-        let hybrid = CollectedHybrid(hybridID: hybridID, name: name, emoji: emoji,
+        let hybrid: CollectedHybrid
+        if let existing = collectedHybrids.first(where: { $0.hybridID == hybridID }) {
+            existing.count += 1
+            hybrid = existing
+        } else {
+            let name = HybridAnimal.hybridName(parent1: def1.name, parent2: def2.name)
+            let emoji = def1.emoji + def2.emoji
+            hybrid = CollectedHybrid(hybridID: hybridID, name: name, emoji: emoji,
                                      parent1ID: id1, parent2ID: id2)
-        context.insert(hybrid)
+            context.insert(hybrid)
+        }
         challengeVM.recordHybrid(playerProgress: playerProgress)
         resultHybrid = hybrid
         selectedFirst = ""

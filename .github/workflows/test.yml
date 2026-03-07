@@ -32,8 +32,20 @@ jobs:
 
       - name: Generate coverage badge
         run: |
-          COVERAGE=$(xcrun xccov view --report TestResults.xcresult | grep 'FartZoo Watch App.app' | awk '{print $NF}' | tr -d '%')
-          if [ -z "$COVERAGE" ]; then COVERAGE=0; fi
+          LINE=$(xcrun xccov view --report TestResults.xcresult | grep 'FartZoo Watch App.app')
+          echo "xccov line: $LINE"
+          COVERAGE=$(echo "$LINE" | grep -oE '[0-9]+\.[0-9]+%' | tr -d '%')
+          if [ -z "$COVERAGE" ]; then
+            # Try extracting fraction like (627/1817)
+            NUMS=$(echo "$LINE" | grep -oE '\(([0-9]+)/([0-9]+)\)' | tr -d '()')
+            if [ -n "$NUMS" ]; then
+              NUM=$(echo "$NUMS" | cut -d'/' -f1)
+              DEN=$(echo "$NUMS" | cut -d'/' -f2)
+              COVERAGE=$(echo "scale=1; $NUM * 100 / $DEN" | bc)
+            else
+              COVERAGE=0
+            fi
+          fi
           echo "Coverage: ${COVERAGE}%"
 
           # Pick badge color based on coverage

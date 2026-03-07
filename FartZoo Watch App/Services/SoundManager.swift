@@ -24,6 +24,17 @@ class SoundManager {
         WKInterfaceDevice.current().play(.click)
     }
 
+    func playHybridFart(parent1ID: String, parent2ID: String) {
+        guard let parent1 = AnimalDatabase.shared.animal(id: parent1ID),
+              let parent2 = AnimalDatabase.shared.animal(id: parent2ID) else { return }
+        play(soundFile: parent1.soundFile)
+        WKInterfaceDevice.current().play(.click)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.play(soundFile: parent2.soundFile)
+            WKInterfaceDevice.current().play(.click)
+        }
+    }
+
     func playVictory() {
         WKInterfaceDevice.current().play(.success)
     }

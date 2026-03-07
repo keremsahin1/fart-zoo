@@ -44,6 +44,7 @@
 		E9A00B1A0A763D82091E9087 /* FartChefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90A20105375AAFB5411132 /* FartChefView.swift */; };
 		F418A3E353F23AE3D360084A /* fart_uncommon_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CE1522D8FFBC84419347256 /* fart_uncommon_3.wav */; };
 		F617B667EDF2C2157BE19350 /* TeleportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F69DB2704104677C7779FDB /* TeleportViewModel.swift */; };
+		FA8BCC7F30922A852D2CF79F /* HybridCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0279FBD11387086CB0FDE58 /* HybridCardView.swift */; };
 		FBEFE02A7DCBFFA9BB86275A /* fart_uncommon_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = A2423B4EB88AD47BBD15C1D4 /* fart_uncommon_2.wav */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		C03BF91F2F7B01D736D383AC /* DailyChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengeView.swift; sourceTree = "<group>"; };
 		C91611EC41785396BDF4E949 /* fart_legendary_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_legendary_3.wav; sourceTree = "<group>"; };
 		CF6417A9591A4EDE3D2C6AE6 /* DailyChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallenge.swift; sourceTree = "<group>"; };
+		D0279FBD11387086CB0FDE58 /* HybridCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HybridCardView.swift; sourceTree = "<group>"; };
 		D4E2D1EC91B89D94063EA57F /* fart_rare_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_rare_2.wav; sourceTree = "<group>"; };
 		D767CF31F89897AD79C91290 /* FartZooTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartZooTests.swift; sourceTree = "<group>"; };
 		DA01EDDA1C85472FB60DD58F /* TeleportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleportTests.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				F1F03CC999AB1A1CDA840BEA /* AnimalCardView.swift */,
 				C03BF91F2F7B01D736D383AC /* DailyChallengeView.swift */,
 				DA90A20105375AAFB5411132 /* FartChefView.swift */,
+				D0279FBD11387086CB0FDE58 /* HybridCardView.swift */,
 				E35C9273CE461B61E858ADD0 /* QuestView.swift */,
 				9CC49D0C849004C991C1080E /* TeleportView.swift */,
 				AC62EC8528F10E96FC451DE7 /* ZooView.swift */,
@@ -273,7 +276,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 169059B5F10FCF077A45639E /* Build configuration list for PBXProject "FartZoo" */;
 			developmentRegion = en;
@@ -334,6 +339,7 @@
 				49D34A10459A8BA2F3DE123E /* DailyChallengeViewModel.swift in Sources */,
 				E9A00B1A0A763D82091E9087 /* FartChefView.swift in Sources */,
 				722DDDAC44FC74A502251916 /* FartZooApp.swift in Sources */,
+				FA8BCC7F30922A852D2CF79F /* HybridCardView.swift in Sources */,
 				03BFFA54C601F23A708F4DCC /* PlayerProgress.swift in Sources */,
 				53E3553A3BD79B78C331AAB5 /* QuestView.swift in Sources */,
 				7AE8E3AA57619386826214F5 /* QuestViewModel.swift in Sources */,
@@ -406,7 +412,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -419,7 +424,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -480,7 +484,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -500,7 +503,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

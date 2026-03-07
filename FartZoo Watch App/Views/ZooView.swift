@@ -35,7 +35,7 @@ struct ZooView: View {
                         Text("🪙 \(playerProgress.coins)")
                             .font(.headline)
                         Spacer()
-                        Text("\(collectedAnimals.count) animals")
+                        Text("\(collectedAnimals.count + collectedHybrids.count) animals")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -56,7 +56,7 @@ struct ZooView: View {
 
                     Divider()
 
-                    if collectedDefs.isEmpty {
+                    if collectedDefs.isEmpty && collectedHybrids.isEmpty {
                         VStack {
                             Text("Welcome to Fart Zoo! 🐾")
                                 .font(.headline)
@@ -72,6 +72,12 @@ struct ZooView: View {
                             ForEach(collectedDefs, id: \.0.id) { (animal, count) in
                                 AnimalCardView(animal: animal, count: count) {
                                     SoundManager.shared.playFart(for: animal)
+                                    challengeVM.recordFart(playerProgress: playerProgress)
+                                }
+                            }
+                            ForEach(collectedHybrids, id: \.hybridID) { hybrid in
+                                HybridCardView(hybrid: hybrid) {
+                                    SoundManager.shared.playHybridFart(parent1ID: hybrid.parent1ID, parent2ID: hybrid.parent2ID)
                                     challengeVM.recordFart(playerProgress: playerProgress)
                                 }
                             }

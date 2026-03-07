@@ -2,12 +2,7 @@ import SwiftUI
 
 struct DailyChallengeView: View {
     let playerProgress: PlayerProgress
-    @State private var vm: DailyChallengeViewModel
-
-    init(playerProgress: PlayerProgress) {
-        self.playerProgress = playerProgress
-        _vm = State(initialValue: DailyChallengeViewModel(playerProgress: playerProgress))
-    }
+    @Environment(DailyChallengeViewModel.self) private var vm
 
     var body: some View {
         VStack(spacing: 8) {

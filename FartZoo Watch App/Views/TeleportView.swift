@@ -62,6 +62,7 @@ struct TeleportView: View {
                     }
 
                     Button("Teleport Again") {
+                        globeRotation = 0
                         vm.teleport()
                         challengeVM.recordTeleport(playerProgress: playerProgress)
                     }

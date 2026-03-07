@@ -4,17 +4,15 @@ import XCTest
 final class FartChefTests: XCTestCase {
 
     func test_hybrid_name_dog_plus_fish() {
-        XCTAssertEqual(HybridAnimal.hybridName(parent1: "Dog", parent2: "Fish"), "Dogfish")
+        // Dog (3 chars, take 70%→3) = "Dog", Fish (4 chars, take 60% suffix→3) = "ish" → "Dogish"
+        XCTAssertEqual(HybridAnimal.hybridName(parent1: "Dog", parent2: "Fish"), "Dogish")
     }
 
     func test_hybrid_name_cow_plus_elephant() {
-        // "Cow" prefix (2 chars) + "ant" suffix (last 4/2=2 chars of "Elephant" = "nt"... let's check)
-        // parent1 = "Cow" (3 chars), half1 = first 2 chars = "Co"
-        // parent2 = "Elephant" (8 chars), half2 = last 4 chars = "hant"
-        // result = "Cohant"
+        // Cow (3 chars, take all) = "Cow", Elephant (8 chars, take 60% suffix→5) = "phant" → "Cowphant"
         let result = HybridAnimal.hybridName(parent1: "Cow", parent2: "Elephant")
         XCTAssertFalse(result.isEmpty)
-        XCTAssertTrue(result.hasPrefix("Co"), "Should start with prefix of Cow: \(result)")
+        XCTAssertTrue(result.hasPrefix("Cow"), "Should start with Cow: \(result)")
     }
 
     func test_hybrid_id_is_order_independent() {

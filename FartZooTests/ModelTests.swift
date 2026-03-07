@@ -25,7 +25,7 @@ final class ModelTests: XCTestCase {
 
     func test_hybrid_name_combines_parent_names() {
         let name = HybridAnimal.hybridName(parent1: "Dog", parent2: "Fish")
-        XCTAssertEqual(name, "Dogfish")
+        XCTAssertEqual(name, "Dogish")
     }
 
     func test_daily_challenge_returns_valid_challenge() {

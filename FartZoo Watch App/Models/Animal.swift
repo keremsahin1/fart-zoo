@@ -57,8 +57,10 @@ struct HybridAnimal: Identifiable, Codable {
     let soundFile: String
 
     static func hybridName(parent1: String, parent2: String) -> String {
-        let half1 = String(parent1.prefix(parent1.count / 2 + parent1.count % 2))
-        let half2 = String(parent2.suffix(parent2.count / 2))
+        let take1 = max(2, Int(ceil(Double(parent1.count) * 0.7)))
+        let take2 = max(2, Int(ceil(Double(parent2.count) * 0.6)))
+        let half1 = String(parent1.prefix(take1))
+        let half2 = String(parent2.suffix(take2))
         return half1 + half2.lowercased()
     }
 

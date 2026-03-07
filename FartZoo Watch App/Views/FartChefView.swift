@@ -8,8 +8,8 @@ struct FartChefView: View {
     @Environment(\.modelContext) private var context
     @Environment(DailyChallengeViewModel.self) private var challengeVM
 
-    @State private var selectedFirst: String?
-    @State private var selectedSecond: String?
+    @State private var selectedFirst: String = ""
+    @State private var selectedSecond: String = ""
     @State private var resultHybrid: CollectedHybrid?
     @State private var showResult = false
 
@@ -27,16 +27,16 @@ struct FartChefView: View {
                 Text("Fart Chef").font(.headline)
                 Text("Mix two animals!").font(.caption).foregroundStyle(.secondary)
 
-                selectionRow(label: "Animal 1", selectedID: $selectedFirst,
-                             excluding: selectedSecond)
+                pickerRow(label: "Animal 1", selectedID: $selectedFirst,
+                          excluding: selectedSecond)
 
                 Text("+").font(.title2)
 
-                selectionRow(label: "Animal 2", selectedID: $selectedSecond,
-                             excluding: selectedFirst)
+                pickerRow(label: "Animal 2", selectedID: $selectedSecond,
+                          excluding: selectedFirst)
 
-                if let id1 = selectedFirst, let id2 = selectedSecond, id1 != id2 {
-                    Button("Mix!") { createHybrid(id1: id1, id2: id2) }
+                if !selectedFirst.isEmpty && !selectedSecond.isEmpty && selectedFirst != selectedSecond {
+                    Button("Mix!") { createHybrid(id1: selectedFirst, id2: selectedSecond) }
                         .buttonStyle(.borderedProminent)
                         .tint(.orange)
                 }
@@ -69,33 +69,20 @@ struct FartChefView: View {
         }
     }
 
-    private func selectionRow(label: String, selectedID: Binding<String?>, excluding: String?) -> some View {
-        Menu {
-            ForEach(eligibleAnimals.filter { $0.0.id != excluding }, id: \.0.id) { (animal, count) in
-                Button("\(animal.emoji) \(animal.name) (x\(count))") {
-                    selectedID.wrappedValue = animal.id
-                }
+    private func pickerRow(label: String, selectedID: Binding<String>, excluding: String) -> some View {
+        let options = eligibleAnimals.filter { $0.0.id != excluding }
+        return Picker(label, selection: selectedID) {
+            Text(label).tag("")
+            ForEach(options, id: \.0.id) { (animal, count) in
+                Text("\(animal.emoji) \(animal.name) x\(count)").tag(animal.id)
             }
-        } label: {
-            HStack {
-                if let id = selectedID.wrappedValue,
-                   let def = AnimalDatabase.shared.animal(id: id) {
-                    Text("\(def.emoji) \(def.name)")
-                } else {
-                    Text(label).foregroundStyle(.secondary)
-                }
-                Spacer()
-                Image(systemName: "chevron.down")
-            }
-            .font(.caption)
-            .padding(6)
-            .background(Color.secondary.opacity(0.2))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
         }
+        .pickerStyle(.navigationLink)
     }
 
     private func createHybrid(id1: String, id2: String) {
-        guard let def1 = AnimalDatabase.shared.animal(id: id1),
+        guard !id1.isEmpty, !id2.isEmpty,
+              let def1 = AnimalDatabase.shared.animal(id: id1),
               let def2 = AnimalDatabase.shared.animal(id: id2),
               let collected1 = collectedAnimals.first(where: { $0.animalID == id1 }),
               let collected2 = collectedAnimals.first(where: { $0.animalID == id2 }),
@@ -113,8 +100,8 @@ struct FartChefView: View {
         context.insert(hybrid)
         challengeVM.recordHybrid(playerProgress: playerProgress)
         resultHybrid = hybrid
-        selectedFirst = nil
-        selectedSecond = nil
+        selectedFirst = ""
+        selectedSecond = ""
         showResult = true
         SoundManager.shared.playVictory()
     }

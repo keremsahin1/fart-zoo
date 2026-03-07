@@ -4,7 +4,7 @@ import WatchKit
 class SoundManager {
     static let shared = SoundManager()
     private init() {}
-    private var players: [AVAudioPlayer] = []
+    private(set) var players: [AVAudioPlayer] = []
 
     func play(soundFile: String) {
         guard let url = Bundle.main.url(forResource: soundFile, withExtension: "wav") else {

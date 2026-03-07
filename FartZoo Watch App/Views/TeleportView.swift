@@ -8,7 +8,7 @@ struct TeleportView: View {
     @Environment(DailyChallengeViewModel.self) private var challengeVM
 
     var body: some View {
-        VStack(spacing: 8) {
+        Group {
             if vm.isAnimating {
                 VStack {
                     Text("🌍")
@@ -23,41 +23,52 @@ struct TeleportView: View {
                         .font(.caption)
                 }
             } else if let location = vm.currentLocation {
-                Text(location.displayName)
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
+                VStack(spacing: 0) {
+                    Text(location.displayName)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 4)
+                        .padding(.bottom, 2)
+                        .padding(.horizontal)
 
-                let animals = AnimalDatabase.shared.animals(for: location)
-                ScrollView {
-                    VStack(spacing: 4) {
-                        ForEach(animals) { animal in
-                            Button {
-                                vm.selectAnimal(animal)
-                            } label: {
-                                HStack {
-                                    Text(animal.emoji)
-                                    VStack(alignment: .leading) {
-                                        Text(animal.name).font(.caption)
-                                        Text("🪙 \(animal.rarity.coinCost)")
+                    let animals = AnimalDatabase.shared.animals(for: location)
+                    ScrollView {
+                        VStack(spacing: 2) {
+                            ForEach(animals) { animal in
+                                Button {
+                                    vm.selectAnimal(animal)
+                                } label: {
+                                    HStack {
+                                        Text(animal.emoji)
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            Text(animal.name).font(.caption)
+                                            Text("🪙 \(animal.rarity.coinCost)")
+                                                .font(.caption2)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                        Spacer()
+                                        Text(animal.rarity.displayName)
                                             .font(.caption2)
-                                            .foregroundStyle(.secondary)
+                                            .foregroundStyle(rarityColor(animal.rarity))
                                     }
-                                    Spacer()
-                                    Text(animal.rarity.displayName)
-                                        .font(.caption2)
-                                        .foregroundStyle(rarityColor(animal.rarity))
+                                    .padding(.horizontal, 6)
                                 }
+                                .buttonStyle(.bordered)
+                                .padding(.horizontal, 4)
                             }
-                            .buttonStyle(.bordered)
                         }
+                        .padding(.vertical, 2)
                     }
-                }
 
-                Button("Teleport Again") {
-                    vm.teleport()
-                    challengeVM.recordTeleport(playerProgress: playerProgress)
+                    Button("Teleport Again") {
+                        vm.teleport()
+                        challengeVM.recordTeleport(playerProgress: playerProgress)
+                    }
+                    .font(.caption2)
+                    .padding(.top, 4)
+                    .padding(.bottom, 6)
                 }
-                    .font(.caption)
             } else {
                 Button {
                     vm.teleport()
@@ -73,7 +84,6 @@ struct TeleportView: View {
                 .buttonStyle(.borderedProminent)
             }
         }
-        .padding()
         .sheet(isPresented: $vm.showQuest) {
             if let animal = vm.selectedAnimal {
                 QuestView(animal: animal, playerProgress: playerProgress)

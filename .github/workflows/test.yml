@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: macos-15
@@ -27,13 +30,30 @@ jobs:
             -enableCodeCoverage YES \
             -resultBundlePath TestResults.xcresult
 
-      - name: Export coverage
+      - name: Generate coverage badge
         run: |
-          xcrun xccov view --report --json TestResults.xcresult > coverage.json
+          COVERAGE=$(xcrun xccov view --report TestResults.xcresult | grep 'FartZoo Watch App.app' | awk '{print $NF}' | tr -d '%')
+          if [ -z "$COVERAGE" ]; then COVERAGE=0; fi
+          echo "Coverage: ${COVERAGE}%"
 
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          files: coverage.json
-          flags: watchos
-          fail_ci_if_error: false
+          # Pick badge color based on coverage
+          if (( $(echo "$COVERAGE >= 80" | bc -l) )); then COLOR="brightgreen"
+          elif (( $(echo "$COVERAGE >= 60" | bc -l) )); then COLOR="yellow"
+          elif (( $(echo "$COVERAGE >= 40" | bc -l) )); then COLOR="orange"
+          else COLOR="red"; fi
+
+          # Download badge SVG
+          curl -s "https://img.shields.io/badge/coverage-${COVERAGE}%25-${COLOR}" > coverage-badge.svg
+
+      - name: Commit coverage badge
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add coverage-badge.svg
+          if git diff --cached --quiet; then
+            echo "No badge change"
+          else
+            git commit -m "ci: update coverage badge [skip ci]"
+            git push
+          fi

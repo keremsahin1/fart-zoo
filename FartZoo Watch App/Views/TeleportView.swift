@@ -25,11 +25,11 @@ struct TeleportView: View {
             } else if let location = vm.currentLocation {
                 VStack(spacing: 0) {
                     Text(location.displayName)
-                        .font(.footnote)
+                        .font(.caption2)
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
-                        .padding(.top, 4)
-                        .padding(.bottom, 2)
+                        .padding(.top, 2)
+                        .padding(.bottom, 1)
                         .padding(.horizontal)
 
                     let animals = AnimalDatabase.shared.animals(for: location)
@@ -67,8 +67,8 @@ struct TeleportView: View {
                         challengeVM.recordTeleport(playerProgress: playerProgress)
                     }
                     .font(.caption2)
-                    .padding(.top, 4)
-                    .padding(.bottom, 6)
+                    .padding(.top, 2)
+                    .padding(.bottom, 4)
                 }
             } else {
                 Button {

@@ -103,7 +103,7 @@ struct FartChefView: View {
         selectedFirst = ""
         selectedSecond = ""
         showResult = true
-        SoundManager.shared.playVictory()
+        SoundManager.shared.playHybridFart(parent1ID: id1, parent2ID: id2)
     }
 
     private func hybridResultView(hybrid: CollectedHybrid) -> some View {

@@ -2,3 +2,8 @@
 DerivedData/
 .DS_Store
 *.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+xcuserdata/
+.build/
+Pods/
+*.ipa

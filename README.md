@@ -8,7 +8,7 @@ Built by a father-son duo for maximum laughs.
 
 1. **Teleport** — Spin the globe and land in a random location (Amazon Rainforest, Arctic, Galápagos Islands, and more)
 2. **Catch** — Pick an animal, pay coins, and tap as fast as you can to catch it before time runs out
-3. **Collect** — Build your zoo with 107 animals across 5 rarity tiers
+3. **Collect** — Build your zoo with 111 animals across 5 rarity tiers
 4. **Mix** — Use the Fart Chef to combine two animals into a silly hybrid (Dog + Fish = Dogish)
 5. **Challenge** — Complete 5 rotating daily challenges to earn free coins
 

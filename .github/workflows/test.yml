@@ -21,12 +21,19 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Find watch simulator
+        id: simulator
+        run: |
+          DEST=$(xcodebuild -scheme "FartZoo Watch App" -showdestinations 2>/dev/null | grep 'watchOS Simulator' | head -1 | sed 's/.*{ //' | sed 's/ }$//')
+          echo "destination=$DEST" >> "$GITHUB_OUTPUT"
+          echo "Using: $DEST"
+
       - name: Build and test with coverage
         run: |
           xcodebuild test \
             -project FartZoo.xcodeproj \
             -scheme "FartZoo Watch App" \
-            -destination 'platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)' \
+            -destination '${{ steps.simulator.outputs.destination }}' \
             -enableCodeCoverage YES \
             -resultBundlePath TestResults.xcresult
 

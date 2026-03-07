@@ -60,7 +60,7 @@ Select an Apple Watch simulator and press Cmd+R to run.
 
 ### Sound Files
 
-The repo includes placeholder `.wav` files. Replace them with real fart sound recordings in `FartZoo Watch App/Resources/Sounds/`. Free sound effects can be found at [freesound.org](https://freesound.org).
+Sound effects sourced from [freesound.org](https://freesound.org) are included in `FartZoo Watch App/Resources/Sounds/`.
 
 ## Future Plans
 

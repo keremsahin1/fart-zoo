@@ -35,7 +35,7 @@ struct ZooView: View {
                         Text("🪙 \(playerProgress.coins)")
                             .font(.headline)
                         Spacer()
-                        Text("\(collectedAnimals.count + collectedHybrids.count) animals")
+                        Text("\(collectedAnimals.count + collectedHybrids.count) species")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

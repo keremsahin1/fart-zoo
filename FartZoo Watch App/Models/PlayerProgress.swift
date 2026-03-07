@@ -1,0 +1,47 @@
+import SwiftData
+import Foundation
+
+@Model
+class CollectedAnimal {
+    var animalID: String
+    var count: Int
+    var collectedAt: Date
+
+    init(animalID: String) {
+        self.animalID = animalID
+        self.count = 1
+        self.collectedAt = Date()
+    }
+}
+
+@Model
+class CollectedHybrid {
+    var hybridID: String
+    var name: String
+    var emoji: String
+    var parent1ID: String
+    var parent2ID: String
+    var createdAt: Date
+
+    init(hybridID: String, name: String, emoji: String, parent1ID: String, parent2ID: String) {
+        self.hybridID = hybridID
+        self.name = name
+        self.emoji = emoji
+        self.parent1ID = parent1ID
+        self.parent2ID = parent2ID
+        self.createdAt = Date()
+    }
+}
+
+@Model
+class PlayerProgress {
+    var coins: Int
+    var lastDailyChallengeDate: Date?
+    var dailyChallengeCompleted: Bool
+
+    init() {
+        self.coins = 50
+        self.lastDailyChallengeDate = nil
+        self.dailyChallengeCompleted = false
+    }
+}

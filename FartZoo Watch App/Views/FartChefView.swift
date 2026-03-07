@@ -6,6 +6,7 @@ struct FartChefView: View {
     @Query private var collectedAnimals: [CollectedAnimal]
     @Query private var collectedHybrids: [CollectedHybrid]
     @Environment(\.modelContext) private var context
+    @Environment(DailyChallengeViewModel.self) private var challengeVM
 
     @State private var selectedFirst: String?
     @State private var selectedSecond: String?
@@ -110,6 +111,7 @@ struct FartChefView: View {
         let hybrid = CollectedHybrid(hybridID: hybridID, name: name, emoji: emoji,
                                      parent1ID: id1, parent2ID: id2)
         context.insert(hybrid)
+        challengeVM.recordHybrid(playerProgress: playerProgress)
         resultHybrid = hybrid
         selectedFirst = nil
         selectedSecond = nil

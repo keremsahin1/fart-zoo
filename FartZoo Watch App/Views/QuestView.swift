@@ -8,6 +8,7 @@ struct QuestView: View {
     @State private var vm: QuestViewModel
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(DailyChallengeViewModel.self) private var challengeVM
     @Query private var collectedAnimals: [CollectedAnimal]
 
     init(animal: AnimalDefinition, playerProgress: PlayerProgress) {
@@ -106,5 +107,6 @@ struct QuestView: View {
         } else {
             context.insert(CollectedAnimal(animalID: animal.id))
         }
+        challengeVM.recordCatch(playerProgress: playerProgress)
     }
 }

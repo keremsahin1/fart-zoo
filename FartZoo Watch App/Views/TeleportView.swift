@@ -5,6 +5,7 @@ struct TeleportView: View {
     @State private var vm = TeleportViewModel()
     @State private var globeRotation: Double = 0
     @Environment(\.modelContext) private var context
+    @Environment(DailyChallengeViewModel.self) private var challengeVM
 
     var body: some View {
         VStack(spacing: 8) {
@@ -52,11 +53,15 @@ struct TeleportView: View {
                     }
                 }
 
-                Button("Teleport Again") { vm.teleport() }
+                Button("Teleport Again") {
+                    vm.teleport()
+                    challengeVM.recordTeleport(playerProgress: playerProgress)
+                }
                     .font(.caption)
             } else {
                 Button {
                     vm.teleport()
+                    challengeVM.recordTeleport(playerProgress: playerProgress)
                 } label: {
                     VStack {
                         Text("🌍")

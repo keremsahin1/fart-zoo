@@ -14,6 +14,7 @@ struct FartZooApp: App {
 struct RootView: View {
     @Query private var progressList: [PlayerProgress]
     @Environment(\.modelContext) private var context
+    @State private var challengeVM: DailyChallengeViewModel?
 
     private var playerProgress: PlayerProgress {
         if let existing = progressList.first { return existing }
@@ -23,6 +24,14 @@ struct RootView: View {
     }
 
     var body: some View {
-        ZooView()
+        if let vm = challengeVM {
+            ZooView()
+                .environment(vm)
+        } else {
+            ProgressView()
+                .onAppear {
+                    challengeVM = DailyChallengeViewModel(playerProgress: playerProgress)
+                }
+        }
     }
 }

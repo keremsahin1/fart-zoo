@@ -6,6 +6,7 @@ struct ZooView: View {
     @Query private var collectedHybrids: [CollectedHybrid]
     @Query private var progressList: [PlayerProgress]
     @Environment(\.modelContext) private var context
+    @Environment(DailyChallengeViewModel.self) private var challengeVM
     @State private var showTeleport = false
     @State private var showChef = false
     @State private var showDailyChallenge = false
@@ -71,6 +72,7 @@ struct ZooView: View {
                             ForEach(collectedDefs, id: \.0.id) { (animal, count) in
                                 AnimalCardView(animal: animal, count: count) {
                                     SoundManager.shared.playFart(for: animal)
+                                    challengeVM.recordFart(playerProgress: playerProgress)
                                 }
                             }
                         }

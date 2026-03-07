@@ -13,11 +13,9 @@ struct FartChefView: View {
     @State private var resultHybrid: CollectedHybrid?
     @State private var showResult = false
 
-    private var eligibleAnimals: [(AnimalDefinition, Int)] {
+    private var eligibleAnimals: [AnimalDefinition] {
         collectedAnimals.compactMap { collected in
-            guard let def = AnimalDatabase.shared.animal(id: collected.animalID),
-                  collected.count >= 1 else { return nil }
-            return (def, collected.count)
+            AnimalDatabase.shared.animal(id: collected.animalID)
         }
     }
 
@@ -70,11 +68,11 @@ struct FartChefView: View {
     }
 
     private func pickerRow(label: String, selectedID: Binding<String>, excluding: String) -> some View {
-        let options = eligibleAnimals.filter { $0.0.id != excluding }
+        let options = eligibleAnimals.filter { $0.id != excluding }
         return Picker(label, selection: selectedID) {
             Text(label).tag("")
-            ForEach(options, id: \.0.id) { (animal, count) in
-                Text("\(animal.emoji) \(animal.name) x\(count)").tag(animal.id)
+            ForEach(options, id: \.id) { animal in
+                Text("\(animal.emoji) \(animal.name)").tag(animal.id)
             }
         }
         .pickerStyle(.navigationLink)
@@ -83,13 +81,7 @@ struct FartChefView: View {
     private func createHybrid(id1: String, id2: String) {
         guard !id1.isEmpty, !id2.isEmpty,
               let def1 = AnimalDatabase.shared.animal(id: id1),
-              let def2 = AnimalDatabase.shared.animal(id: id2),
-              let collected1 = collectedAnimals.first(where: { $0.animalID == id1 }),
-              let collected2 = collectedAnimals.first(where: { $0.animalID == id2 }),
-              collected1.count >= 1, collected2.count >= 1 else { return }
-
-        collected1.count -= 1
-        collected2.count -= 1
+              let def2 = AnimalDatabase.shared.animal(id: id2) else { return }
 
         let hybridID = HybridAnimal.hybridID(parent1ID: id1, parent2ID: id2)
         let name = HybridAnimal.hybridName(parent1: def1.name, parent2: def2.name)

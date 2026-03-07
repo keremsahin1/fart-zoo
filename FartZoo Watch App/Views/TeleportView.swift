@@ -32,10 +32,9 @@ struct TeleportView: View {
                         .padding(.bottom, 1)
                         .padding(.horizontal)
 
-                    let animals = AnimalDatabase.shared.animals(for: location)
                     ScrollView {
                         VStack(spacing: 2) {
-                            ForEach(animals) { animal in
+                            ForEach(vm.shuffledAnimals) { animal in
                                 Button {
                                     vm.selectAnimal(animal)
                                 } label: {

@@ -18,6 +18,9 @@ targets:
         SWIFT_VERSION: 5.9
         WATCHOS_DEPLOYMENT_TARGET: "10.0"
         TARGETED_DEVICE_FAMILY: "4"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: ""
+        INFOPLIST_KEY_WKWatchOnly: YES
 
   FartZooTests:
     type: bundle.unit-test
@@ -31,3 +34,4 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.fartzoo.tests
         SWIFT_VERSION: 5.9
+        GENERATE_INFOPLIST_FILE: YES

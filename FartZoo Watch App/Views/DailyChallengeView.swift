@@ -44,6 +44,9 @@ struct DailyChallengeView: View {
                     Spacer()
                     if challenge.type == .fartAnimals {
                         Button("Fart! 💨") {
+                            let animals = AnimalDatabase.shared.all
+                            let random = animals[Int.random(in: 0..<animals.count)]
+                            SoundManager.shared.playFart(for: random)
                             vm.recordFart(playerProgress: playerProgress)
                         }
                         .font(.caption2)

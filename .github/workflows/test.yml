@@ -27,10 +27,9 @@ jobs:
             -enableCodeCoverage YES \
             -resultBundlePath TestResults.xcresult
 
-      - name: Convert coverage to JSON
+      - name: Export coverage
         run: |
-          xcrun xcresulttool get --path TestResults.xcresult \
-            --format json --type codeCoverage > coverage.json
+          xcrun xccov view --report --json TestResults.xcresult > coverage.json
 
       - name: Upload to Codecov
         uses: codecov/codecov-action@v5

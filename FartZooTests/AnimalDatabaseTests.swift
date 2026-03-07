@@ -25,8 +25,8 @@ final class AnimalDatabaseTests: XCTestCase {
         XCTAssertEqual(ids.count, Set(ids).count, "Duplicate animal IDs found")
     }
 
-    func test_database_has_at_least_30_animals() {
-        XCTAssertGreaterThanOrEqual(AnimalDatabase.shared.all.count, 30)
+    func test_database_has_at_least_100_animals() {
+        XCTAssertGreaterThanOrEqual(AnimalDatabase.shared.all.count, 100)
     }
 
     func test_prehistoric_animals_are_all_extinct() {

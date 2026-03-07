@@ -20,6 +20,7 @@ enum Rarity: String, CaseIterable, Codable {
 
 enum WorldLocation: String, CaseIterable, Codable {
     case farm, forest, arctic, savanna, ocean, rainforest, outback, prehistoric
+    case mountains, desert, swamp, galapagos
 
     var displayName: String {
         switch self {
@@ -31,6 +32,10 @@ enum WorldLocation: String, CaseIterable, Codable {
         case .rainforest:  return "Amazon Rainforest"
         case .outback:     return "Australian Outback"
         case .prehistoric: return "Prehistoric World"
+        case .mountains:   return "Mountains"
+        case .desert:      return "Desert"
+        case .swamp:       return "Swamp"
+        case .galapagos:   return "Galápagos Islands"
         }
     }
 

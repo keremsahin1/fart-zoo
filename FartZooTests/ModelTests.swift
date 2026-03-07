@@ -1,4 +1,5 @@
 import XCTest
+@testable import FartZoo_Watch_App
 
 final class ModelTests: XCTestCase {
 

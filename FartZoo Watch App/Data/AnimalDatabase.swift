@@ -56,9 +56,9 @@ struct AnimalDatabase {
         AnimalDefinition(id: "octopus",      name: "Octopus",      emoji: "🐙",   rarity: .uncommon,  location: .ocean, soundFile: "fart_uncommon_3"),
         AnimalDefinition(id: "anglerfish",   name: "Anglerfish",   emoji: "🐟",   rarity: .rare,      location: .ocean, soundFile: "fart_rare_2"),
         AnimalDefinition(id: "dolphin",      name: "Dolphin",      emoji: "🐬",   rarity: .uncommon,  location: .ocean, soundFile: "fart_uncommon_1"),
-        AnimalDefinition(id: "seahorse",     name: "Seahorse",     emoji: "🐡",   rarity: .uncommon,  location: .ocean, soundFile: "fart_uncommon_2"),
+        AnimalDefinition(id: "seahorse",     name: "Seahorse",     emoji: "🐠",   rarity: .uncommon,  location: .ocean, soundFile: "fart_uncommon_2"),
         AnimalDefinition(id: "jellyfish",    name: "Jellyfish",    emoji: "🪼",   rarity: .common,    location: .ocean, soundFile: "fart_common_1"),
-        AnimalDefinition(id: "manta_ray",    name: "Manta Ray",    emoji: "🐟",   rarity: .rare,      location: .ocean, soundFile: "fart_rare_3"),
+        AnimalDefinition(id: "manta_ray",    name: "Manta Ray",    emoji: "🐠",   rarity: .rare,      location: .ocean, soundFile: "fart_rare_3"),
 
         // AMAZON RAINFOREST (9)
         AnimalDefinition(id: "toucan",       name: "Toucan",       emoji: "🦜",   rarity: .uncommon,  location: .rainforest, soundFile: "fart_uncommon_1"),
@@ -68,18 +68,18 @@ struct AnimalDatabase {
         AnimalDefinition(id: "anaconda",     name: "Anaconda",     emoji: "🐍",   rarity: .rare,      location: .rainforest, soundFile: "fart_rare_1"),
         AnimalDefinition(id: "sloth",        name: "Sloth",        emoji: "🦥",   rarity: .uncommon,  location: .rainforest, soundFile: "fart_uncommon_3"),
         AnimalDefinition(id: "parrot",       name: "Parrot",       emoji: "🦜",   rarity: .common,    location: .rainforest, soundFile: "fart_common_2"),
-        AnimalDefinition(id: "capybara",     name: "Capybara",     emoji: "🐹",   rarity: .uncommon,  location: .rainforest, soundFile: "fart_uncommon_1"),
+        AnimalDefinition(id: "capybara",     name: "Capybara",     emoji: "🦫",   rarity: .uncommon,  location: .rainforest, soundFile: "fart_uncommon_1"),
         AnimalDefinition(id: "spider_monkey", name: "Spider Monkey", emoji: "🐒", rarity: .rare,      location: .rainforest, soundFile: "fart_rare_2"),
 
         // AUSTRALIAN OUTBACK (8)
         AnimalDefinition(id: "kangaroo",     name: "Kangaroo",     emoji: "🦘",   rarity: .common,    location: .outback, soundFile: "fart_common_3"),
         AnimalDefinition(id: "koala",        name: "Koala",        emoji: "🐨",   rarity: .uncommon,  location: .outback, soundFile: "fart_uncommon_3"),
-        AnimalDefinition(id: "platypus",     name: "Platypus",     emoji: "🦆",   rarity: .rare,      location: .outback, soundFile: "fart_rare_2"),
+        AnimalDefinition(id: "platypus",     name: "Platypus",     emoji: "🦫",   rarity: .rare,      location: .outback, soundFile: "fart_rare_2"),
         AnimalDefinition(id: "kakapo",       name: "Kakapo",       emoji: "🦜",   rarity: .legendary, location: .outback, soundFile: "fart_legendary_3"),
         AnimalDefinition(id: "wombat",       name: "Wombat",       emoji: "🐾",   rarity: .uncommon,  location: .outback, soundFile: "fart_uncommon_1"),
         AnimalDefinition(id: "emu",          name: "Emu",          emoji: "🐦",   rarity: .common,    location: .outback, soundFile: "fart_common_4"),
         AnimalDefinition(id: "crocodile",    name: "Crocodile",    emoji: "🐊",   rarity: .rare,      location: .outback, soundFile: "fart_rare_1"),
-        AnimalDefinition(id: "tasmanian_devil", name: "Tasmanian Devil", emoji: "😈", rarity: .rare, location: .outback, soundFile: "fart_rare_3"),
+        AnimalDefinition(id: "tasmanian_devil", name: "Tasmanian Devil", emoji: "🐾", rarity: .rare, location: .outback, soundFile: "fart_rare_3"),
 
         // PREHISTORIC WORLD (10)
         AnimalDefinition(id: "trex",          name: "T-Rex",         emoji: "🦖", rarity: .extinct, location: .prehistoric, soundFile: "fart_extinct_1"),

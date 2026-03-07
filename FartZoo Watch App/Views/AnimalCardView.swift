@@ -21,19 +21,9 @@ struct AnimalCardView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(6)
-            .background(rarityColor(animal.rarity).opacity(0.2))
+            .background(animal.rarity.color.opacity(0.2))
             .clipShape(RoundedRectangle(cornerRadius: 8))
         }
         .buttonStyle(.plain)
-    }
-
-    private func rarityColor(_ rarity: Rarity) -> Color {
-        switch rarity {
-        case .common:    return .gray
-        case .uncommon:  return .green
-        case .rare:      return .blue
-        case .legendary: return .purple
-        case .extinct:   return .red
-        }
     }
 }

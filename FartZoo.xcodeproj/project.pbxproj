@@ -20,6 +20,7 @@
 		44AA4FA2D332B0FA932DA84E /* fart_rare_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3732AD46C8B70650B21E3F8C /* fart_rare_3.wav */; };
 		49D34A10459A8BA2F3DE123E /* DailyChallengeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486EB7D8695AFC421457BDC6 /* DailyChallengeViewModel.swift */; };
 		53E3553A3BD79B78C331AAB5 /* QuestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35C9273CE461B61E858ADD0 /* QuestView.swift */; };
+		583132A587DE8C0C97F0312E /* ExtractedLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943D52615B2BA9BA148D7F2 /* ExtractedLogicTests.swift */; };
 		58BED11386DF38B6421B99FF /* fart_extinct_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 94B720AA2B26944CA730AEA7 /* fart_extinct_2.wav */; };
 		5D183F3DA4A47D4903D1EB19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB69140C042D36435CFA101 /* Assets.xcassets */; };
 		6DAAC064AE527767264461B8 /* QuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDFBCF87C908314C0FCEF6 /* QuestTests.swift */; };
@@ -31,6 +32,7 @@
 		7AE8E3AA57619386826214F5 /* QuestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329F4C92454BAD0075D776E5 /* QuestViewModel.swift */; };
 		7BCD3AB6C9BE0BB5914FEA2E /* AnimalDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC839A5E4F2FCE66B963E2C /* AnimalDatabaseTests.swift */; };
 		7E95424687A164CE5367D93A /* fart_common_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4BFB1ACECB87FA4F4DD64A9C /* fart_common_1.wav */; };
+		83C627C4863875A7921D1167 /* Rarity+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B82B5FF2EFD372EA0378C4 /* Rarity+Color.swift */; };
 		89F45F39D8AE1EC1596C8BDC /* fart_common_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1F27A1AFE4633CC95D399BD0 /* fart_common_4.wav */; };
 		91DB4EA6D2E0FBBE4682D44A /* TeleportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01EDDA1C85472FB60DD58F /* TeleportTests.swift */; };
 		96EA0F03C24929F264BF8B52 /* AnimalDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D628A23A40A29C710BE9E7E /* AnimalDatabase.swift */; };
@@ -73,12 +75,14 @@
 		22C166C14CEC70717C79C46B /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		329F4C92454BAD0075D776E5 /* QuestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewModel.swift; sourceTree = "<group>"; };
 		3732AD46C8B70650B21E3F8C /* fart_rare_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_rare_3.wav; sourceTree = "<group>"; };
+		38B82B5FF2EFD372EA0378C4 /* Rarity+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rarity+Color.swift"; sourceTree = "<group>"; };
 		3D628A23A40A29C710BE9E7E /* AnimalDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDatabase.swift; sourceTree = "<group>"; };
 		3EB69140C042D36435CFA101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47D3237DFBA4FB008291014D /* FartChefTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartChefTests.swift; sourceTree = "<group>"; };
 		486EB7D8695AFC421457BDC6 /* DailyChallengeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengeViewModel.swift; sourceTree = "<group>"; };
 		4BFB1ACECB87FA4F4DD64A9C /* fart_common_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_common_1.wav; sourceTree = "<group>"; };
 		55D0853C123C5AF4F018F52E /* fart_uncommon_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_uncommon_1.wav; sourceTree = "<group>"; };
+		5943D52615B2BA9BA148D7F2 /* ExtractedLogicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractedLogicTests.swift; sourceTree = "<group>"; };
 		5CE1522D8FFBC84419347256 /* fart_uncommon_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_uncommon_3.wav; sourceTree = "<group>"; };
 		64BF5ECC1AD36D73B557215E /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		6790810F80EAEB494D41FFEE /* fart_rare_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_rare_1.wav; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				22C166C14CEC70717C79C46B /* Animal.swift */,
 				CF6417A9591A4EDE3D2C6AE6 /* DailyChallenge.swift */,
 				0CF160A4039F7FA053E2150F /* PlayerProgress.swift */,
+				38B82B5FF2EFD372EA0378C4 /* Rarity+Color.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 				6BC839A5E4F2FCE66B963E2C /* AnimalDatabaseTests.swift */,
 				97205DB9027A3EC46E52383F /* DailyChallengeTests.swift */,
 				BBA3310AF428C50423A336BD /* DailyChallengeViewModelTests.swift */,
+				5943D52615B2BA9BA148D7F2 /* ExtractedLogicTests.swift */,
 				47D3237DFBA4FB008291014D /* FartChefTests.swift */,
 				D767CF31F89897AD79C91290 /* FartZooTests.swift */,
 				64BF5ECC1AD36D73B557215E /* ModelTests.swift */,
@@ -359,6 +365,7 @@
 				03BFFA54C601F23A708F4DCC /* PlayerProgress.swift in Sources */,
 				53E3553A3BD79B78C331AAB5 /* QuestView.swift in Sources */,
 				7AE8E3AA57619386826214F5 /* QuestViewModel.swift in Sources */,
+				83C627C4863875A7921D1167 /* Rarity+Color.swift in Sources */,
 				E749F4AA013BBCE5C9E7D7D8 /* SoundManager.swift in Sources */,
 				3448EA7C5DD77E04CA70F76F /* TeleportView.swift in Sources */,
 				F617B667EDF2C2157BE19350 /* TeleportViewModel.swift in Sources */,
@@ -373,6 +380,7 @@
 				7BCD3AB6C9BE0BB5914FEA2E /* AnimalDatabaseTests.swift in Sources */,
 				9BF6B2ED2CC1B7C2CE8307DA /* DailyChallengeTests.swift in Sources */,
 				ED0ECB6308C1209752DB75BE /* DailyChallengeViewModelTests.swift in Sources */,
+				583132A587DE8C0C97F0312E /* ExtractedLogicTests.swift in Sources */,
 				C439B154F599F56074B2DFBE /* FartChefTests.swift in Sources */,
 				AD6B89F4C94DFAC3C89F2D68 /* FartZooTests.swift in Sources */,
 				0CEDAE6E890AF3B0CA8418CD /* ModelTests.swift in Sources */,

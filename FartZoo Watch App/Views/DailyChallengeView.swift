@@ -19,7 +19,7 @@ struct DailyChallengeView: View {
     private func challengeRow(index: Int, challenge: DailyChallenge) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .top) {
-                Text(vm.isCompleted(index) ? "✅" : typeEmoji(challenge.type))
+                Text(vm.isCompleted(index) ? "✅" : challenge.type.emoji)
                     .font(.caption)
                 Text(challenge.description)
                     .font(.caption2)
@@ -36,7 +36,7 @@ struct DailyChallengeView: View {
                     .foregroundStyle(.green)
             } else {
                 ProgressView(value: vm.progressFraction(for: index))
-                    .tint(progressColor(vm.progressFraction(for: index)))
+                    .tint(ProgressColor.from(fraction: vm.progressFraction(for: index)).color)
                 HStack {
                     Text("\(vm.progressValues[index]) / \(challenge.target)")
                         .font(.caption2)
@@ -60,16 +60,4 @@ struct DailyChallengeView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
-    private func typeEmoji(_ type: DailyChallengeType) -> String {
-        switch type {
-        case .fartAnimals:  return "💨"
-        case .teleport:     return "🌍"
-        case .catchAnimals: return "🎯"
-        case .makeHybrid:   return "🧪"
-        }
-    }
-
-    private func progressColor(_ fraction: Double) -> Color {
-        fraction >= 1 ? .green : fraction >= 0.5 ? .yellow : .blue
-    }
 }

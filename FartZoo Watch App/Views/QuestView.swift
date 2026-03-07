@@ -54,7 +54,7 @@ struct QuestView: View {
                 .font(.headline)
             Text(String(format: "\u{23F1} %.1fs", max(vm.timeRemaining, 0)))
                 .font(.caption)
-                .foregroundStyle(vm.timeRemaining < 3 ? .red : .primary)
+                .foregroundStyle(vm.isTimeWarning ? .red : .primary)
             Button("TAP!") {
                 vm.tap(playerProgress: playerProgress)
             }

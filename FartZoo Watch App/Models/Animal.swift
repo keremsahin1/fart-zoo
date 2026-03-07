@@ -16,6 +16,16 @@ enum Rarity: String, CaseIterable, Codable {
     var coinReward: Int { coinCost / 2 }
 
     var displayName: String { rawValue.capitalized }
+
+    var colorName: String {
+        switch self {
+        case .common:    return "gray"
+        case .uncommon:  return "green"
+        case .rare:      return "blue"
+        case .legendary: return "purple"
+        case .extinct:   return "red"
+        }
+    }
 }
 
 enum WorldLocation: String, CaseIterable, Codable {
@@ -51,6 +61,12 @@ struct AnimalDefinition: Identifiable, Codable, Hashable {
     let rarity: Rarity
     let location: WorldLocation
     let soundFile: String
+}
+
+enum FartChef {
+    static func canMix(first: String, second: String) -> Bool {
+        !first.isEmpty && !second.isEmpty && first != second
+    }
 }
 
 struct HybridAnimal: Identifiable, Codable {

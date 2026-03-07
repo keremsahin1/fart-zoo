@@ -34,6 +34,8 @@ class QuestViewModel {
         }
     }
 
+    var isTimeWarning: Bool { timeRemaining < 3 && timeRemaining > 0 }
+
     init(animal: AnimalDefinition) {
         self.animal = animal
     }

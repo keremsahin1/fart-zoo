@@ -5,6 +5,23 @@ enum DailyChallengeType: String, CaseIterable, Codable {
     case teleport
     case catchAnimals
     case makeHybrid
+
+    var emoji: String {
+        switch self {
+        case .fartAnimals:  return "💨"
+        case .teleport:     return "🌍"
+        case .catchAnimals: return "🎯"
+        case .makeHybrid:   return "🧪"
+        }
+    }
+}
+
+enum ProgressColor: String {
+    case green, yellow, blue
+
+    static func from(fraction: Double) -> ProgressColor {
+        fraction >= 1 ? .green : fraction >= 0.5 ? .yellow : .blue
+    }
 }
 
 struct DailyChallenge {

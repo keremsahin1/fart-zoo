@@ -49,7 +49,7 @@ struct TeleportView: View {
                                         Spacer()
                                         Text(animal.rarity.displayName)
                                             .font(.caption2)
-                                            .foregroundStyle(rarityColor(animal.rarity))
+                                            .foregroundStyle(animal.rarity.color)
                                     }
                                     .padding(.horizontal, 6)
                                 }
@@ -91,13 +91,4 @@ struct TeleportView: View {
         }
     }
 
-    private func rarityColor(_ rarity: Rarity) -> Color {
-        switch rarity {
-        case .common:    return .gray
-        case .uncommon:  return .green
-        case .rare:      return .blue
-        case .legendary: return .purple
-        case .extinct:   return .red
-        }
-    }
 }

@@ -33,7 +33,7 @@ struct FartChefView: View {
                 pickerRow(label: "Animal 2", selectedID: $selectedSecond,
                           excluding: selectedFirst)
 
-                if !selectedFirst.isEmpty && !selectedSecond.isEmpty && selectedFirst != selectedSecond {
+                if FartChef.canMix(first: selectedFirst, second: selectedSecond) {
                     Button("Mix!") { createHybrid(id1: selectedFirst, id2: selectedSecond) }
                         .buttonStyle(.borderedProminent)
                         .tint(.orange)

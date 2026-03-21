@@ -65,8 +65,8 @@ struct QuestView: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
-                Text("Cost: \u{1FA99} \(animal.rarity.coinCost)  You have: \u{1FA99} \(playerProgress.coins)")
-                    .font(.caption2)
+                Text("Cost: \u{1FA99} \(animal.rarity.coinCost)").font(.caption2)
+                Text("You have: \u{1FA99} \(playerProgress.coins)").font(.caption2)
                 Button("Catch it!") {
                     vm.startQuest(playerProgress: playerProgress)
                     if vm.questType == .spin && vm.state == .inProgress {

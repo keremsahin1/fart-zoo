@@ -31,7 +31,7 @@ enum QuestType: String, CaseIterable {
         switch self {
         case .tap:    return "Tap as fast as you can!"
         case .spin:   return "Spin the Digital Crown!"
-        case .timing: return "Tap when you see the animal, not the fart cloud!"
+        case .timing: return "Tap the animal!\nDon't tap the fart cloud!"
         }
     }
 }

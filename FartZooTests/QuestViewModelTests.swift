@@ -527,7 +527,7 @@ final class QuestViewModelTests: XCTestCase {
     }
 
     func test_timing_quest_type_properties() {
-        XCTAssertEqual(QuestType.timing.label, "TIMING!")
+        XCTAssertEqual(QuestType.timing.label, "TIME!")
         XCTAssertEqual(QuestType.timing.emoji, "👀")
     }
 }

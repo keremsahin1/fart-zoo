@@ -15,7 +15,7 @@ enum QuestType: String, CaseIterable {
         switch self {
         case .tap:    return "TAP!"
         case .spin:   return "SPIN!"
-        case .timing: return "TIMING!"
+        case .timing: return "TIME!"
         }
     }
 

@@ -6,6 +6,7 @@ class TeleportViewModel {
     var currentLocation: WorldLocation?
     var shuffledAnimals: [AnimalDefinition] = []
     var isAnimating = false
+    var showAnimalList = false
     var showQuest = false
     var selectedAnimal: AnimalDefinition?
 
@@ -18,6 +19,7 @@ class TeleportViewModel {
             self.currentLocation = location
             self.shuffledAnimals = AnimalDatabase.shared.animals(for: location).shuffled()
             self.isAnimating = false
+            self.showAnimalList = true
         }
     }
 

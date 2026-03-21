@@ -7,59 +7,29 @@ struct TeleportView: View {
     @Environment(DailyChallengeViewModel.self) private var challengeVM
 
     var body: some View {
-        Group {
-            if vm.isAnimating {
-                VStack {
+        NavigationStack {
+            VStack {
+                if vm.isAnimating {
                     SpinningGlobeView()
                     Text("Teleporting...")
                         .font(.caption)
-                }
-            } else if let location = vm.currentLocation {
-                ScrollView {
-                    VStack(spacing: 2) {
-                        Text(location.displayName)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-
-                        ForEach(vm.shuffledAnimals) { animal in
-                            Button {
-                                vm.selectAnimal(animal)
-                            } label: {
-                                HStack {
-                                    Text(animal.emoji)
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        Text(animal.name).font(.caption)
-                                        Text("🪙 \(animal.rarity.coinCost)")
-                                            .font(.caption2)
-                                            .foregroundStyle(.secondary)
-                                    }
-                                    Spacer()
-                                    Text(animal.rarity.displayName)
-                                        .font(.caption2)
-                                        .foregroundStyle(animal.rarity.color)
-                                }
-                                .padding(.horizontal, 6)
-                            }
-                            .buttonStyle(.bordered)
-                            .padding(.horizontal, 4)
+                } else {
+                    Button {
+                        vm.teleport()
+                        challengeVM.recordTeleport(playerProgress: playerProgress)
+                    } label: {
+                        VStack {
+                            Text("🌍")
+                                .font(.largeTitle)
+                            Text("Teleport!")
+                                .font(.headline)
                         }
-
                     }
-                    .padding(.vertical, 2)
+                    .buttonStyle(.borderedProminent)
                 }
-            } else {
-                Button {
-                    vm.teleport()
-                    challengeVM.recordTeleport(playerProgress: playerProgress)
-                } label: {
-                    VStack {
-                        Text("🌍")
-                            .font(.largeTitle)
-                        Text("Teleport!")
-                            .font(.headline)
-                    }
-                }
-                .buttonStyle(.borderedProminent)
+            }
+            .navigationDestination(isPresented: $vm.showAnimalList) {
+                animalListView
             }
         }
         .sheet(isPresented: $vm.showQuest) {
@@ -69,4 +39,37 @@ struct TeleportView: View {
         }
     }
 
+    private var animalListView: some View {
+        ScrollView {
+            VStack(spacing: 2) {
+                Text(vm.currentLocation?.displayName ?? "")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+
+                ForEach(vm.shuffledAnimals) { animal in
+                    Button {
+                        vm.selectAnimal(animal)
+                    } label: {
+                        HStack {
+                            Text(animal.emoji)
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(animal.name).font(.caption)
+                                Text("🪙 \(animal.rarity.coinCost)")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Text(animal.rarity.displayName)
+                                .font(.caption2)
+                                .foregroundStyle(animal.rarity.color)
+                        }
+                        .padding(.horizontal, 6)
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.horizontal, 4)
+                }
+            }
+            .padding(.vertical, 2)
+        }
+    }
 }

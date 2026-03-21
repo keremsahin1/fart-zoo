@@ -26,6 +26,14 @@ enum QuestType: String, CaseIterable {
         case .timing: return "👀"
         }
     }
+
+    var hint: String {
+        switch self {
+        case .tap:    return "Tap as fast as you can!"
+        case .spin:   return "Spin the Digital Crown!"
+        case .timing: return "Tap when you see the animal, not the fart cloud!"
+        }
+    }
 }
 
 @Observable

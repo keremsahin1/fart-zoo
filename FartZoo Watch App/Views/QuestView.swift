@@ -63,6 +63,10 @@ struct QuestView: View {
             Text("\(vm.questType.emoji) \(vm.questType.label)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+            Text(vm.questType.hint)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
             Text("Cost: \u{1FA99} \(animal.rarity.coinCost)").font(.caption)
             Text("You have: \u{1FA99} \(playerProgress.coins)").font(.caption)
             Button("Catch it!") {

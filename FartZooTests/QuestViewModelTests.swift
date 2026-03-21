@@ -530,4 +530,97 @@ final class QuestViewModelTests: XCTestCase {
         XCTAssertEqual(QuestType.timing.label, "TIME!")
         XCTAssertEqual(QuestType.timing.emoji, "👀")
     }
+
+    // MARK: - Timing edge cases
+
+    func test_timing_taps_after_winning_are_ignored() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isAnimalVisible = true
+
+        for _ in 0..<vm.timingTarget {
+            vm.timingTap(playerProgress: progress)
+        }
+        XCTAssertEqual(vm.state, .won)
+
+        let countAtWin = vm.tapCount
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, countAtWin)
+    }
+
+    func test_timing_multiple_penalties_then_recovery() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.isAnimalVisible = true
+        vm.timingTap(playerProgress: progress)
+        vm.timingTap(playerProgress: progress) // tapCount = 2
+
+        vm.isAnimalVisible = false
+        vm.timingTap(playerProgress: progress) // tapCount = 1
+        vm.timingTap(playerProgress: progress) // tapCount = 0
+        vm.timingTap(playerProgress: progress) // tapCount = 0 (clamped)
+        XCTAssertEqual(vm.tapCount, 0)
+
+        vm.isAnimalVisible = true
+        vm.timingTap(playerProgress: progress) // tapCount = 1
+        XCTAssertEqual(vm.tapCount, 1)
+    }
+
+    // MARK: - Spin edge cases
+
+    func test_spin_fart_interval() {
+        let vm = makeSpinVM()
+        XCTAssertEqual(vm.spinFartInterval, 100, accuracy: 0.01) // 500 / 5
+    }
+
+    func test_spin_fart_interval_legendary() {
+        let vm = makeSpinVM(animal: legendaryAnimal)
+        XCTAssertEqual(vm.spinFartInterval, 500, accuracy: 0.01) // 2500 / 5
+    }
+
+    // MARK: - Quest type hints
+
+    func test_tap_hint() {
+        XCTAssertEqual(QuestType.tap.hint, "Tap as fast as you can!")
+    }
+
+    func test_spin_hint() {
+        XCTAssertEqual(QuestType.spin.hint, "Spin the Digital Crown!")
+    }
+
+    func test_timing_hint() {
+        XCTAssertTrue(QuestType.timing.hint.contains("Tap the animal"))
+    }
+
+    // MARK: - Cross-type isolation
+
+    func test_timing_tap_does_not_affect_spin() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0)
+    }
+
+    func test_regular_tap_does_not_affect_timing() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.tap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0)
+    }
+
+    func test_spin_does_not_affect_timing() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+
+        simulateCrown(vm, to: 100, playerProgress: progress)
+        XCTAssertEqual(vm.spinProgress, 0)
+    }
 }

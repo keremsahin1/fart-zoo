@@ -46,6 +46,7 @@
 		C8D4B09C65287A633374366A /* SpinningGlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C57FBA7BA4106D2BDC7D91 /* SpinningGlobeView.swift */; };
 		CC8E34596F126831E321D476 /* DailyChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BF91F2F7B01D736D383AC /* DailyChallengeView.swift */; };
 		D58A41715929DAE01703A1C7 /* fart_extinct_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1EA411B651572CC230BCA2B4 /* fart_extinct_1.wav */; };
+		D7CF45027AD295672022CB2D /* TeleportViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4572049BF00F9A0B119C8 /* TeleportViewModelTests.swift */; };
 		DD3BA22CA09BBAA75F7F2520 /* fart_uncommon_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55D0853C123C5AF4F018F52E /* fart_uncommon_1.wav */; };
 		E749F4AA013BBCE5C9E7D7D8 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4BE04624294AB8610FB3B4 /* SoundManager.swift */; };
 		E8FE0C98C09389FC3A79946E /* fart_common_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = F258C9E1A18F245FC01217A0 /* fart_common_2.wav */; };
@@ -93,6 +94,7 @@
 		71C400A2DAB385320AF3419F /* fart_legendary_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_legendary_2.wav; sourceTree = "<group>"; };
 		74615E2E3AB18F77E148662C /* PlayerProgressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProgressTests.swift; sourceTree = "<group>"; };
 		7F69DB2704104677C7779FDB /* TeleportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleportViewModel.swift; sourceTree = "<group>"; };
+		85D4572049BF00F9A0B119C8 /* TeleportViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleportViewModelTests.swift; sourceTree = "<group>"; };
 		89CFC1C9E76577DE6F238D05 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
 		94B720AA2B26944CA730AEA7 /* fart_extinct_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_extinct_2.wav; sourceTree = "<group>"; };
 		97205DB9027A3EC46E52383F /* DailyChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChallengeTests.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				A4C62E5E4EC9903D3E2D9141 /* QuestViewModelTests.swift */,
 				89CFC1C9E76577DE6F238D05 /* SoundManagerTests.swift */,
 				DA01EDDA1C85472FB60DD58F /* TeleportTests.swift */,
+				85D4572049BF00F9A0B119C8 /* TeleportViewModelTests.swift */,
 			);
 			path = FartZooTests;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				718E63FA36A0889EEE7C7B71 /* QuestViewModelTests.swift in Sources */,
 				014F3DE462A7A473E5CE1426 /* SoundManagerTests.swift in Sources */,
 				91DB4EA6D2E0FBBE4682D44A /* TeleportTests.swift in Sources */,
+				D7CF45027AD295672022CB2D /* TeleportViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

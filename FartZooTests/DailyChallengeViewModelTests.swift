@@ -188,4 +188,84 @@ final class DailyChallengeViewModelTests: XCTestCase {
             XCTAssertEqual(vm.progressValues[hybridIndex], before + 1)
         }
     }
+
+    // MARK: - Win With Both
+
+    func test_win_with_both_needs_tap_and_spin() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let bothIndex = vm.challenges.firstIndex(where: { $0.type == .winWithBoth }) {
+            vm.recordCatch(questType: .tap, playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[bothIndex], 0, "Should not increment with just tap")
+
+            vm.recordCatch(questType: .spin, playerProgress: progress)
+            XCTAssertGreaterThan(vm.progressValues[bothIndex], 0, "Should increment after both tap and spin")
+        }
+    }
+
+    func test_win_with_both_spin_first_then_tap() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let bothIndex = vm.challenges.firstIndex(where: { $0.type == .winWithBoth }) {
+            vm.recordCatch(questType: .spin, playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[bothIndex], 0)
+
+            vm.recordCatch(questType: .tap, playerProgress: progress)
+            XCTAssertGreaterThan(vm.progressValues[bothIndex], 0)
+        }
+    }
+
+    // MARK: - Edge cases
+
+    func test_fart_does_not_increment_teleport() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let teleportIndex = vm.challenges.firstIndex(where: { $0.type == .teleport }) {
+            let before = vm.progressValues[teleportIndex]
+            vm.recordFart(playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[teleportIndex], before, "Fart should not count as teleport")
+        }
+    }
+
+    func test_teleport_does_not_increment_catch() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let catchIndex = vm.challenges.firstIndex(where: { $0.type == .catchAnimals }) {
+            let before = vm.progressValues[catchIndex]
+            vm.recordTeleport(playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[catchIndex], before, "Teleport should not count as catch")
+        }
+    }
+
+    func test_challenge_pool_has_15_entries() {
+        XCTAssertEqual(DailyChallenge.pool.count, 15)
+    }
+
+    func test_challenge_pool_has_all_types() {
+        let types = Set(DailyChallenge.pool.map(\.type))
+        for type in DailyChallengeType.allCases {
+            XCTAssertTrue(types.contains(type), "Pool missing challenge type: \(type)")
+        }
+    }
+
+    func test_multiple_completions_award_correct_coins() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+        let initialCoins = progress.coins
+
+        // Complete all fart challenges by recording lots of farts
+        var totalReward = 0
+        for i in vm.challenges.indices where vm.challenges[i].type == .fartAnimals {
+            totalReward += vm.challenges[i].coinReward
+            for _ in 0..<vm.challenges[i].target {
+                vm.recordFart(playerProgress: progress)
+            }
+        }
+
+        XCTAssertEqual(progress.coins, initialCoins + totalReward)
+    }
 }

@@ -123,10 +123,10 @@ class QuestViewModel {
         }
     }
 
-    func updateSpin(newValue: Double, playerProgress: PlayerProgress) {
+    func handleCrownChange(oldValue: Double, newValue: Double, playerProgress: PlayerProgress) {
         guard state == .inProgress, questType == .spin else { return }
-        let delta = abs(newValue - crownRotation)
-        crownRotation = newValue
+        let delta = abs(newValue - oldValue)
+        guard delta > 0.01 else { return }
         spinProgress += delta
         WKInterfaceDevice.current().play(.click)
 

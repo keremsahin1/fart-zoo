@@ -6,6 +6,7 @@ struct QuestView: View {
     let animal: AnimalDefinition
     let playerProgress: PlayerProgress
     @State private var vm: QuestViewModel
+    @FocusState private var isCrownFocused: Bool
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @Environment(DailyChallengeViewModel.self) private var challengeVM
@@ -95,15 +96,20 @@ struct QuestView: View {
                     .fontWeight(.bold)
             }
         }
-        .focusable(vm.questType == .spin)
+        .focused($isCrownFocused)
         .digitalCrownRotation(
             $vm.crownRotation,
             from: -10000, through: 10000,
             sensitivity: .high,
             isContinuous: true
         )
-        .onChange(of: vm.crownRotation) { _, newValue in
-            vm.updateSpin(newValue: newValue, playerProgress: playerProgress)
+        .onChange(of: vm.crownRotation) { oldValue, newValue in
+            vm.handleCrownChange(oldValue: oldValue, newValue: newValue, playerProgress: playerProgress)
+        }
+        .onAppear {
+            if vm.questType == .spin {
+                isCrownFocused = true
+            }
         }
     }
 

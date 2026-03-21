@@ -276,12 +276,19 @@ final class QuestViewModelTests: XCTestCase {
 
     // MARK: - Spinning
 
+    /// Simulates what SwiftUI's binding + onChange does: sets crownRotation, then calls handleCrownChange
+    private func simulateCrown(_ vm: QuestViewModel, to newValue: Double, playerProgress: PlayerProgress) {
+        let oldValue = vm.crownRotation
+        vm.crownRotation = newValue
+        vm.handleCrownChange(oldValue: oldValue, newValue: newValue, playerProgress: playerProgress)
+    }
+
     func test_spin_updates_progress() {
         let progress = makeProgress()
         let vm = makeSpinVM()
         vm.startQuest(playerProgress: progress)
 
-        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        simulateCrown(vm, to: 10.0, playerProgress: progress)
         XCTAssertEqual(vm.spinProgress, 10.0, accuracy: 0.01)
     }
 
@@ -290,8 +297,8 @@ final class QuestViewModelTests: XCTestCase {
         let vm = makeSpinVM()
         vm.startQuest(playerProgress: progress)
 
-        vm.updateSpin(newValue: 5.0, playerProgress: progress)
-        vm.updateSpin(newValue: 15.0, playerProgress: progress)
+        simulateCrown(vm, to: 5.0, playerProgress: progress)
+        simulateCrown(vm, to: 15.0, playerProgress: progress)
         XCTAssertEqual(vm.spinProgress, 15.0, accuracy: 0.01) // |5| + |10|
     }
 
@@ -300,8 +307,8 @@ final class QuestViewModelTests: XCTestCase {
         let vm = makeSpinVM()
         vm.startQuest(playerProgress: progress)
 
-        vm.updateSpin(newValue: 10.0, playerProgress: progress)
-        vm.updateSpin(newValue: 5.0, playerProgress: progress) // reverse
+        simulateCrown(vm, to: 10.0, playerProgress: progress)
+        simulateCrown(vm, to: 5.0, playerProgress: progress) // reverse
         XCTAssertEqual(vm.spinProgress, 15.0, accuracy: 0.01) // |10| + |5|
     }
 
@@ -311,7 +318,7 @@ final class QuestViewModelTests: XCTestCase {
         vm.startQuest(playerProgress: progress)
 
         let coinsAfterStart = progress.coins
-        vm.updateSpin(newValue: vm.spinTarget, playerProgress: progress)
+        simulateCrown(vm, to: vm.spinTarget, playerProgress: progress)
 
         XCTAssertEqual(vm.state, .won)
         XCTAssertEqual(progress.coins, coinsAfterStart + commonAnimal.rarity.coinReward)
@@ -321,7 +328,7 @@ final class QuestViewModelTests: XCTestCase {
         let progress = makeProgress()
         let vm = makeSpinVM()
 
-        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        simulateCrown(vm, to: 10.0, playerProgress: progress)
         XCTAssertEqual(vm.spinProgress, 0, "Spin should be ignored when not in progress")
     }
 
@@ -330,7 +337,7 @@ final class QuestViewModelTests: XCTestCase {
         let vm = makeTapVM()
         vm.startQuest(playerProgress: progress)
 
-        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        simulateCrown(vm, to: 10.0, playerProgress: progress)
         XCTAssertEqual(vm.spinProgress, 0, "Spin should be ignored for tap quest")
     }
 

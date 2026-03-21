@@ -24,14 +24,6 @@ struct TeleportView: View {
                 }
             } else if let location = vm.currentLocation {
                 VStack(spacing: 0) {
-                    Text(location.displayName)
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 2)
-                        .padding(.bottom, 1)
-                        .padding(.horizontal)
-
                     ScrollView {
                         VStack(spacing: 2) {
                             ForEach(vm.shuffledAnimals) { animal in
@@ -60,14 +52,16 @@ struct TeleportView: View {
                         .padding(.vertical, 2)
                     }
 
-                    Button("Teleport Again") {
+                    Button {
                         globeRotation = 0
                         vm.teleport()
                         challengeVM.recordTeleport(playerProgress: playerProgress)
+                    } label: {
+                        Text("\(location.displayName) · 🌍 Teleport")
+                            .font(.caption2)
                     }
-                    .font(.caption2)
-                    .padding(.top, 2)
-                    .padding(.bottom, 4)
+                    .buttonStyle(.bordered)
+                    .padding(.vertical, 2)
                 }
             } else {
                 Button {

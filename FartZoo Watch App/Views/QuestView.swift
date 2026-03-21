@@ -57,26 +57,25 @@ struct QuestView: View {
     }
 
     private var notStartedView: some View {
-        VStack(spacing: 8) {
-            Text(animal.emoji).font(.largeTitle)
-            Text(animal.name).font(.headline)
-            Text("\(vm.questType.emoji) \(vm.questType.label)")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Text(vm.questType.hint)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-            Text("Cost: \u{1FA99} \(animal.rarity.coinCost)").font(.caption)
-            Text("You have: \u{1FA99} \(playerProgress.coins)").font(.caption)
-            Button("Catch it!") {
-                vm.startQuest(playerProgress: playerProgress)
-                if vm.questType == .spin && vm.state == .inProgress {
-                    challengeVM.recordSpinAttempt(playerProgress: playerProgress)
+        ScrollView {
+            VStack(spacing: 6) {
+                Text(animal.emoji).font(.title2)
+                Text(animal.name).font(.headline)
+                Text(vm.questType.hint)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                Text("Cost: \u{1FA99} \(animal.rarity.coinCost)  You have: \u{1FA99} \(playerProgress.coins)")
+                    .font(.caption2)
+                Button("Catch it!") {
+                    vm.startQuest(playerProgress: playerProgress)
+                    if vm.questType == .spin && vm.state == .inProgress {
+                        challengeVM.recordSpinAttempt(playerProgress: playerProgress)
+                    }
                 }
+                .buttonStyle(.borderedProminent)
+                .disabled(playerProgress.coins < animal.rarity.coinCost)
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(playerProgress.coins < animal.rarity.coinCost)
         }
     }
 

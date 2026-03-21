@@ -23,48 +23,48 @@ struct TeleportView: View {
                         .font(.caption)
                 }
             } else if let location = vm.currentLocation {
-                VStack(spacing: 0) {
-                    ScrollView {
-                        VStack(spacing: 2) {
-                            ForEach(vm.shuffledAnimals) { animal in
-                                Button {
-                                    vm.selectAnimal(animal)
-                                } label: {
-                                    HStack {
-                                        Text(animal.emoji)
-                                        VStack(alignment: .leading, spacing: 0) {
-                                            Text(animal.name).font(.caption)
-                                            Text("🪙 \(animal.rarity.coinCost)")
-                                                .font(.caption2)
-                                                .foregroundStyle(.secondary)
-                                        }
-                                        Spacer()
-                                        Text(animal.rarity.displayName)
-                                            .font(.caption2)
-                                            .foregroundStyle(animal.rarity.color)
-                                    }
-                                    .padding(.horizontal, 6)
-                                }
-                                .buttonStyle(.bordered)
-                                .padding(.horizontal, 4)
-                            }
-                        }
-                        .padding(.vertical, 2)
-                    }
-                    .frame(maxHeight: .infinity)
-
-                    Button {
-                        globeRotation = 0
-                        vm.teleport()
-                        challengeVM.recordTeleport(playerProgress: playerProgress)
-                    } label: {
-                        Text("\(location.displayName) · 🌍 Teleport")
+                ScrollView {
+                    VStack(spacing: 2) {
+                        Text(location.displayName)
                             .font(.caption2)
+                            .foregroundStyle(.secondary)
+
+                        ForEach(vm.shuffledAnimals) { animal in
+                            Button {
+                                vm.selectAnimal(animal)
+                            } label: {
+                                HStack {
+                                    Text(animal.emoji)
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        Text(animal.name).font(.caption)
+                                        Text("🪙 \(animal.rarity.coinCost)")
+                                            .font(.caption2)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    Text(animal.rarity.displayName)
+                                        .font(.caption2)
+                                        .foregroundStyle(animal.rarity.color)
+                                }
+                                .padding(.horizontal, 6)
+                            }
+                            .buttonStyle(.bordered)
+                            .padding(.horizontal, 4)
+                        }
+
+                        Button {
+                            globeRotation = 0
+                            vm.teleport()
+                            challengeVM.recordTeleport(playerProgress: playerProgress)
+                        } label: {
+                            Text("🌍 Teleport Again")
+                                .font(.caption2)
+                        }
+                        .buttonStyle(.bordered)
+                        .padding(.top, 4)
                     }
-                    .buttonStyle(.bordered)
-                    .padding(.bottom, 2)
+                    .padding(.vertical, 2)
                 }
-                .frame(maxHeight: .infinity)
             } else {
                 Button {
                     vm.teleport()

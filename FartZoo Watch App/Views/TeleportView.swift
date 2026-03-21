@@ -3,9 +3,6 @@ import SwiftUI
 struct TeleportView: View {
     let playerProgress: PlayerProgress
     @State private var vm = TeleportViewModel()
-    @State private var globeRotation: Double = 0
-    @State private var globeIndex: Int = 0
-    private let globes = ["🌍", "🌎", "🌏"]
     @Environment(\.modelContext) private var context
     @Environment(DailyChallengeViewModel.self) private var challengeVM
 
@@ -47,16 +44,6 @@ struct TeleportView: View {
                             .padding(.horizontal, 4)
                         }
 
-                        Button {
-                            globeRotation = 0
-                            vm.teleport()
-                            challengeVM.recordTeleport(playerProgress: playerProgress)
-                        } label: {
-                            Text("🌍 Teleport Again")
-                                .font(.caption2)
-                        }
-                        .buttonStyle(.bordered)
-                        .padding(.top, 4)
                     }
                     .padding(.vertical, 2)
                 }

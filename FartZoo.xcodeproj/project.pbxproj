@@ -37,11 +37,13 @@
 		91DB4EA6D2E0FBBE4682D44A /* TeleportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01EDDA1C85472FB60DD58F /* TeleportTests.swift */; };
 		96EA0F03C24929F264BF8B52 /* AnimalDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D628A23A40A29C710BE9E7E /* AnimalDatabase.swift */; };
 		9BF6B2ED2CC1B7C2CE8307DA /* DailyChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97205DB9027A3EC46E52383F /* DailyChallengeTests.swift */; };
+		A40A07681D3E97CE418B29A9 /* earth_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EC8755C182C94BC7A76B0043 /* earth_texture.jpg */; };
 		AD6B89F4C94DFAC3C89F2D68 /* FartZooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D767CF31F89897AD79C91290 /* FartZooTests.swift */; };
 		BA7E7161CDCE5C2E8951807E /* fart_rare_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6790810F80EAEB494D41FFEE /* fart_rare_1.wav */; };
 		C2E5D7892A517B22134C4AD3 /* fart_rare_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = D4E2D1EC91B89D94063EA57F /* fart_rare_2.wav */; };
 		C439B154F599F56074B2DFBE /* FartChefTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D3237DFBA4FB008291014D /* FartChefTests.swift */; };
 		C5D894AE91A6F188EC59F0E9 /* PlayerProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74615E2E3AB18F77E148662C /* PlayerProgressTests.swift */; };
+		C8D4B09C65287A633374366A /* SpinningGlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C57FBA7BA4106D2BDC7D91 /* SpinningGlobeView.swift */; };
 		CC8E34596F126831E321D476 /* DailyChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BF91F2F7B01D736D383AC /* DailyChallengeView.swift */; };
 		D58A41715929DAE01703A1C7 /* fart_extinct_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1EA411B651572CC230BCA2B4 /* fart_extinct_1.wav */; };
 		DD3BA22CA09BBAA75F7F2520 /* fart_uncommon_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55D0853C123C5AF4F018F52E /* fart_uncommon_1.wav */; };
@@ -74,6 +76,7 @@
 		1F27A1AFE4633CC95D399BD0 /* fart_common_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_common_4.wav; sourceTree = "<group>"; };
 		22C166C14CEC70717C79C46B /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		329F4C92454BAD0075D776E5 /* QuestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewModel.swift; sourceTree = "<group>"; };
+		32C57FBA7BA4106D2BDC7D91 /* SpinningGlobeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningGlobeView.swift; sourceTree = "<group>"; };
 		3732AD46C8B70650B21E3F8C /* fart_rare_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_rare_3.wav; sourceTree = "<group>"; };
 		38B82B5FF2EFD372EA0378C4 /* Rarity+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rarity+Color.swift"; sourceTree = "<group>"; };
 		3D628A23A40A29C710BE9E7E /* AnimalDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDatabase.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		DA90A20105375AAFB5411132 /* FartChefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartChefView.swift; sourceTree = "<group>"; };
 		E35C9273CE461B61E858ADD0 /* QuestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestView.swift; sourceTree = "<group>"; };
 		EB84E28BA31C87C7CA0C9C10 /* FartZooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FartZooApp.swift; sourceTree = "<group>"; };
+		EC8755C182C94BC7A76B0043 /* earth_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = earth_texture.jpg; sourceTree = "<group>"; };
 		F1F03CC999AB1A1CDA840BEA /* AnimalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalCardView.swift; sourceTree = "<group>"; };
 		F258C9E1A18F245FC01217A0 /* fart_common_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fart_common_2.wav; sourceTree = "<group>"; };
 		F4E6B1F85D1A479B8E9C15D5 /* FartZoo Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FartZoo Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +172,7 @@
 		70530963C64FDC4BF61BEA4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EC8755C182C94BC7A76B0043 /* earth_texture.jpg */,
 				D56A96A4FE34042F3D0BEF1B /* Sounds */,
 			);
 			path = Resources;
@@ -189,6 +194,7 @@
 				DA90A20105375AAFB5411132 /* FartChefView.swift */,
 				D0279FBD11387086CB0FDE58 /* HybridCardView.swift */,
 				E35C9273CE461B61E858ADD0 /* QuestView.swift */,
+				32C57FBA7BA4106D2BDC7D91 /* SpinningGlobeView.swift */,
 				9CC49D0C849004C991C1080E /* TeleportView.swift */,
 				AC62EC8528F10E96FC451DE7 /* ZooView.swift */,
 			);
@@ -328,6 +334,7 @@
 			files = (
 				5D183F3DA4A47D4903D1EB19 /* Assets.xcassets in Resources */,
 				71B164786B6498E86B5905F9 /* README.txt in Resources */,
+				A40A07681D3E97CE418B29A9 /* earth_texture.jpg in Resources */,
 				7E95424687A164CE5367D93A /* fart_common_1.wav in Resources */,
 				E8FE0C98C09389FC3A79946E /* fart_common_2.wav in Resources */,
 				1889D036E7D8BD3993578DA4 /* fart_common_3.wav in Resources */,
@@ -367,6 +374,7 @@
 				7AE8E3AA57619386826214F5 /* QuestViewModel.swift in Sources */,
 				83C627C4863875A7921D1167 /* Rarity+Color.swift in Sources */,
 				E749F4AA013BBCE5C9E7D7D8 /* SoundManager.swift in Sources */,
+				C8D4B09C65287A633374366A /* SpinningGlobeView.swift in Sources */,
 				3448EA7C5DD77E04CA70F76F /* TeleportView.swift in Sources */,
 				F617B667EDF2C2157BE19350 /* TeleportViewModel.swift in Sources */,
 				00A6C2E2E650126AF3DFA017 /* ZooView.swift in Sources */,

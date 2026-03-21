@@ -4,6 +4,8 @@ struct TeleportView: View {
     let playerProgress: PlayerProgress
     @State private var vm = TeleportViewModel()
     @State private var globeRotation: Double = 0
+    @State private var globeIndex: Int = 0
+    private let globes = ["🌍", "🌎", "🌏"]
     @Environment(\.modelContext) private var context
     @Environment(DailyChallengeViewModel.self) private var challengeVM
 
@@ -11,14 +13,7 @@ struct TeleportView: View {
         Group {
             if vm.isAnimating {
                 VStack {
-                    Text("🌍")
-                        .font(.largeTitle)
-                        .rotationEffect(.degrees(globeRotation))
-                        .onAppear {
-                            withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
-                                globeRotation = 360
-                            }
-                        }
+                    SpinningGlobeView()
                     Text("Teleporting...")
                         .font(.caption)
                 }

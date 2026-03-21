@@ -51,8 +51,7 @@ struct TeleportView: View {
                         }
                         .padding(.vertical, 2)
                     }
-
-                    Spacer(minLength: 0)
+                    .frame(maxHeight: .infinity)
 
                     Button {
                         globeRotation = 0
@@ -65,6 +64,7 @@ struct TeleportView: View {
                     .buttonStyle(.bordered)
                     .padding(.bottom, 2)
                 }
+                .frame(maxHeight: .infinity)
             } else {
                 Button {
                     vm.teleport()

@@ -19,6 +19,8 @@ struct QuestView: View {
 
     var body: some View {
         switch vm.state {
+        case .choosingQuest:
+            choosingQuestView
         case .notStarted:
             notStartedView
         case .inProgress:
@@ -32,10 +34,34 @@ struct QuestView: View {
         }
     }
 
+    private var choosingQuestView: some View {
+        VStack(spacing: 8) {
+            Text(animal.emoji).font(.largeTitle)
+            Text(animal.name).font(.headline)
+            Text("Choose your quest:").font(.caption).foregroundStyle(.secondary)
+            HStack(spacing: 8) {
+                ForEach(QuestType.allCases, id: \.self) { type in
+                    Button {
+                        vm.chooseQuest(type)
+                    } label: {
+                        VStack(spacing: 2) {
+                            Text(type.emoji).font(.title3)
+                            Text(type.label).font(.caption2)
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+        }
+    }
+
     private var notStartedView: some View {
         VStack(spacing: 8) {
             Text(animal.emoji).font(.largeTitle)
             Text(animal.name).font(.headline)
+            Text("\(vm.questType.emoji) \(vm.questType.label)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
             Text("Cost: \u{1FA99} \(animal.rarity.coinCost)").font(.caption)
             Text("You have: \u{1FA99} \(playerProgress.coins)").font(.caption)
             Button("Catch it!") {
@@ -49,17 +75,35 @@ struct QuestView: View {
     private var inProgressView: some View {
         VStack(spacing: 4) {
             Text(animal.emoji).font(.title2)
-            ProgressView(value: Double(vm.tapCount), total: Double(vm.tapTarget))
-            Text("\(vm.tapCount) / \(vm.tapTarget)")
+            ProgressView(value: min(vm.progress, 1.0))
+            Text(vm.progressText)
                 .font(.headline)
             Text(String(format: "\u{23F1} %.1fs", max(vm.timeRemaining, 0)))
                 .font(.caption)
                 .foregroundStyle(vm.isTimeWarning ? .red : .primary)
-            Button("TAP!") {
-                vm.tap(playerProgress: playerProgress)
+
+            if vm.questType == .tap {
+                Button("TAP!") {
+                    vm.tap(playerProgress: playerProgress)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.green)
+            } else {
+                Text("Spin the Crown!")
+                    .font(.caption)
+                    .foregroundStyle(.green)
+                    .fontWeight(.bold)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.green)
+        }
+        .focusable(vm.questType == .spin)
+        .digitalCrownRotation(
+            $vm.crownRotation,
+            from: -10000, through: 10000,
+            sensitivity: .high,
+            isContinuous: true
+        )
+        .onChange(of: vm.crownRotation) { _, newValue in
+            vm.updateSpin(newValue: newValue, playerProgress: playerProgress)
         }
     }
 

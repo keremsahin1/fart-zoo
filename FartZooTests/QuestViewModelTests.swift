@@ -24,12 +24,53 @@ final class QuestViewModelTests: XCTestCase {
         return p
     }
 
+    private func makeTapVM(animal: AnimalDefinition? = nil) -> QuestViewModel {
+        let vm = QuestViewModel(animal: animal ?? commonAnimal)
+        vm.chooseQuest(.tap)
+        return vm
+    }
+
+    private func makeSpinVM(animal: AnimalDefinition? = nil) -> QuestViewModel {
+        let vm = QuestViewModel(animal: animal ?? commonAnimal)
+        vm.chooseQuest(.spin)
+        return vm
+    }
+
     // MARK: - Initial State
 
-    func test_initial_state_is_notStarted() {
+    func test_initial_state_is_choosingQuest() {
         let vm = QuestViewModel(animal: commonAnimal)
-        XCTAssertEqual(vm.state, .notStarted)
+        XCTAssertEqual(vm.state, .choosingQuest)
         XCTAssertEqual(vm.tapCount, 0)
+        XCTAssertEqual(vm.spinProgress, 0)
+    }
+
+    func test_chooseQuest_sets_type_and_state() {
+        let vm = QuestViewModel(animal: commonAnimal)
+        vm.chooseQuest(.tap)
+        XCTAssertEqual(vm.questType, .tap)
+        XCTAssertEqual(vm.state, .notStarted)
+
+        let vm2 = QuestViewModel(animal: commonAnimal)
+        vm2.chooseQuest(.spin)
+        XCTAssertEqual(vm2.questType, .spin)
+        XCTAssertEqual(vm2.state, .notStarted)
+    }
+
+    // MARK: - QuestType properties
+
+    func test_questType_labels() {
+        XCTAssertEqual(QuestType.tap.label, "TAP!")
+        XCTAssertEqual(QuestType.spin.label, "SPIN!")
+    }
+
+    func test_questType_emojis() {
+        XCTAssertEqual(QuestType.tap.emoji, "👆")
+        XCTAssertEqual(QuestType.spin.emoji, "🌀")
+    }
+
+    func test_questType_allCases_count() {
+        XCTAssertEqual(QuestType.allCases.count, 2)
     }
 
     // MARK: - Tap Targets
@@ -49,6 +90,32 @@ final class QuestViewModelTests: XCTestCase {
         XCTAssertEqual(vm.tapTarget, 75)
     }
 
+    // MARK: - Spin Targets
+
+    func test_spin_target_common_is_50() {
+        let vm = QuestViewModel(animal: commonAnimal)
+        XCTAssertEqual(vm.spinTarget, 50)
+    }
+
+    func test_spin_target_legendary_is_250() {
+        let vm = QuestViewModel(animal: legendaryAnimal)
+        XCTAssertEqual(vm.spinTarget, 250)
+    }
+
+    func test_spin_target_extinct_is_400() {
+        let vm = QuestViewModel(animal: extinctAnimal)
+        XCTAssertEqual(vm.spinTarget, 400)
+    }
+
+    func test_spin_target_increases_with_rarity() {
+        let commonVM = QuestViewModel(animal: commonAnimal)
+        let legendaryVM = QuestViewModel(animal: legendaryAnimal)
+        let extinctVM = QuestViewModel(animal: extinctAnimal)
+
+        XCTAssertLessThan(commonVM.spinTarget, legendaryVM.spinTarget)
+        XCTAssertLessThan(legendaryVM.spinTarget, extinctVM.spinTarget)
+    }
+
     // MARK: - Time Limits
 
     func test_time_limit_common_is_8() {
@@ -65,7 +132,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_start_quest_deducts_coins() {
         let progress = makeProgress(coins: 100)
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         let cost = commonAnimal.rarity.coinCost
 
         vm.startQuest(playerProgress: progress)
@@ -76,7 +143,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_start_quest_sets_time_remaining() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
 
         vm.startQuest(playerProgress: progress)
 
@@ -85,7 +152,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_start_quest_resets_tap_count() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         vm.tapCount = 5
 
         vm.startQuest(playerProgress: progress)
@@ -93,9 +160,20 @@ final class QuestViewModelTests: XCTestCase {
         XCTAssertEqual(vm.tapCount, 0)
     }
 
+    func test_start_quest_resets_spin_progress() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.spinProgress = 50
+
+        vm.startQuest(playerProgress: progress)
+
+        XCTAssertEqual(vm.spinProgress, 0)
+        XCTAssertEqual(vm.crownRotation, 0)
+    }
+
     func test_insufficient_coins_blocks_quest() {
         let progress = makeProgress(coins: 0)
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
 
         vm.startQuest(playerProgress: progress)
 
@@ -106,7 +184,7 @@ final class QuestViewModelTests: XCTestCase {
     func test_insufficient_coins_exact_boundary() {
         let cost = commonAnimal.rarity.coinCost
         let progress = makeProgress(coins: cost - 1)
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
 
         vm.startQuest(playerProgress: progress)
 
@@ -116,7 +194,7 @@ final class QuestViewModelTests: XCTestCase {
     func test_exact_coins_allows_quest() {
         let cost = commonAnimal.rarity.coinCost
         let progress = makeProgress(coins: cost)
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
 
         vm.startQuest(playerProgress: progress)
 
@@ -128,7 +206,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_tap_increments_count() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         vm.startQuest(playerProgress: progress)
 
         vm.tap(playerProgress: progress)
@@ -140,15 +218,23 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_tap_ignored_when_not_in_progress() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
-        // state is .notStarted
+        let vm = makeTapVM()
         vm.tap(playerProgress: progress)
         XCTAssertEqual(vm.tapCount, 0, "Tap should be ignored when not in progress")
     }
 
+    func test_tap_ignored_for_spin_quest() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.tap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0, "Tap should be ignored for spin quest")
+    }
+
     func test_reaching_tap_target_wins() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         vm.startQuest(playerProgress: progress)
 
         let coinsAfterStart = progress.coins
@@ -162,7 +248,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_winning_awards_coin_reward() {
         let progress = makeProgress(coins: 500)
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         vm.startQuest(playerProgress: progress)
 
         let coinsAfterStart = progress.coins
@@ -175,7 +261,7 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_taps_after_winning_are_ignored() {
         let progress = makeProgress()
-        let vm = QuestViewModel(animal: commonAnimal)
+        let vm = makeTapVM()
         vm.startQuest(playerProgress: progress)
 
         for _ in 0..<vm.tapTarget {
@@ -186,6 +272,92 @@ final class QuestViewModelTests: XCTestCase {
         let tapCountAtWin = vm.tapCount
         vm.tap(playerProgress: progress)
         XCTAssertEqual(vm.tapCount, tapCountAtWin, "Taps after winning should be ignored")
+    }
+
+    // MARK: - Spinning
+
+    func test_spin_updates_progress() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        XCTAssertEqual(vm.spinProgress, 10.0, accuracy: 0.01)
+    }
+
+    func test_spin_accumulates_absolute_delta() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.updateSpin(newValue: 5.0, playerProgress: progress)
+        vm.updateSpin(newValue: 15.0, playerProgress: progress)
+        XCTAssertEqual(vm.spinProgress, 15.0, accuracy: 0.01) // |5| + |10|
+    }
+
+    func test_spin_reverse_direction_still_adds() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        vm.updateSpin(newValue: 5.0, playerProgress: progress) // reverse
+        XCTAssertEqual(vm.spinProgress, 15.0, accuracy: 0.01) // |10| + |5|
+    }
+
+    func test_spin_reaching_target_wins() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+        vm.startQuest(playerProgress: progress)
+
+        let coinsAfterStart = progress.coins
+        vm.updateSpin(newValue: vm.spinTarget, playerProgress: progress)
+
+        XCTAssertEqual(vm.state, .won)
+        XCTAssertEqual(progress.coins, coinsAfterStart + commonAnimal.rarity.coinReward)
+    }
+
+    func test_spin_ignored_when_not_in_progress() {
+        let progress = makeProgress()
+        let vm = makeSpinVM()
+
+        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        XCTAssertEqual(vm.spinProgress, 0, "Spin should be ignored when not in progress")
+    }
+
+    func test_spin_ignored_for_tap_quest() {
+        let progress = makeProgress()
+        let vm = makeTapVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.updateSpin(newValue: 10.0, playerProgress: progress)
+        XCTAssertEqual(vm.spinProgress, 0, "Spin should be ignored for tap quest")
+    }
+
+    // MARK: - Progress helpers
+
+    func test_progress_fraction_tap() {
+        let vm = makeTapVM()
+        vm.tapCount = 5
+        XCTAssertEqual(vm.progress, 0.5, accuracy: 0.01)
+    }
+
+    func test_progress_fraction_spin() {
+        let vm = makeSpinVM()
+        vm.spinProgress = 25
+        XCTAssertEqual(vm.progress, 0.5, accuracy: 0.01) // 25/50
+    }
+
+    func test_progressText_tap() {
+        let vm = makeTapVM()
+        vm.tapCount = 3
+        XCTAssertEqual(vm.progressText, "3 / 10")
+    }
+
+    func test_progressText_spin() {
+        let vm = makeSpinVM()
+        vm.spinProgress = 30
+        XCTAssertEqual(vm.progressText, "30 / 50")
     }
 
     // MARK: - Rarity Scaling

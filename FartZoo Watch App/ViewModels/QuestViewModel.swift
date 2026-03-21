@@ -100,6 +100,7 @@ class QuestViewModel {
         tapCount = 0
         spinProgress = 0
         crownRotation = 0
+        lastFartThreshold = 0
         timeRemaining = timeLimit
         state = .inProgress
 
@@ -123,6 +124,10 @@ class QuestViewModel {
         }
     }
 
+    private var lastFartThreshold: Int = 0
+
+    var spinFartInterval: Double { spinTarget / 5 }
+
     func handleCrownChange(oldValue: Double, newValue: Double, playerProgress: PlayerProgress) {
         guard state == .inProgress, questType == .spin else { return }
         let delta = abs(newValue - oldValue)
@@ -130,8 +135,13 @@ class QuestViewModel {
         spinProgress += delta
         WKInterfaceDevice.current().play(.click)
 
-        if spinProgress >= spinTarget {
+        let currentThreshold = Int(spinProgress / spinFartInterval)
+        if currentThreshold > lastFartThreshold {
+            lastFartThreshold = currentThreshold
             SoundManager.shared.play(soundFile: animal.soundFile)
+        }
+
+        if spinProgress >= spinTarget {
             win(playerProgress: playerProgress)
         }
     }

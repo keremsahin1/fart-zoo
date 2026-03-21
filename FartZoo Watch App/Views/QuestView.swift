@@ -67,6 +67,9 @@ struct QuestView: View {
             Text("You have: \u{1FA99} \(playerProgress.coins)").font(.caption)
             Button("Catch it!") {
                 vm.startQuest(playerProgress: playerProgress)
+                if vm.questType == .spin && vm.state == .inProgress {
+                    challengeVM.recordSpinAttempt(playerProgress: playerProgress)
+                }
             }
             .buttonStyle(.borderedProminent)
             .disabled(playerProgress.coins < animal.rarity.coinCost)
@@ -74,32 +77,49 @@ struct QuestView: View {
     }
 
     private var inProgressView: some View {
+        Group {
+            if vm.questType == .tap {
+                tapQuestView
+            } else {
+                spinQuestView
+            }
+        }
+    }
+
+    private var tapQuestView: some View {
         VStack(spacing: 4) {
             Text(animal.emoji).font(.title2)
             ProgressView(value: min(vm.progress, 1.0))
-            Text(vm.progressText)
-                .font(.headline)
+            Text(vm.progressText).font(.headline)
             Text(String(format: "\u{23F1} %.1fs", max(vm.timeRemaining, 0)))
                 .font(.caption)
                 .foregroundStyle(vm.isTimeWarning ? .red : .primary)
-
-            if vm.questType == .tap {
-                Button("TAP!") {
-                    vm.tap(playerProgress: playerProgress)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.green)
-            } else {
-                Text("Spin the Crown!")
-                    .font(.caption)
-                    .foregroundStyle(.green)
-                    .fontWeight(.bold)
+            Button("TAP!") {
+                vm.tap(playerProgress: playerProgress)
             }
+            .buttonStyle(.borderedProminent)
+            .tint(.green)
         }
+    }
+
+    private var spinQuestView: some View {
+        VStack(spacing: 4) {
+            Text(animal.emoji).font(.title2)
+            ProgressView(value: min(vm.progress, 1.0))
+            Text(vm.progressText).font(.headline)
+            Text(String(format: "\u{23F1} %.1fs", max(vm.timeRemaining, 0)))
+                .font(.caption)
+                .foregroundStyle(vm.isTimeWarning ? .red : .primary)
+            Text("Spin the Crown!")
+                .font(.caption)
+                .foregroundStyle(.green)
+                .fontWeight(.bold)
+        }
+        .focusable()
         .focused($isCrownFocused)
         .digitalCrownRotation(
             $vm.crownRotation,
-            from: -10000, through: 10000,
+            from: -100000, through: 100000,
             sensitivity: .high,
             isContinuous: true
         )
@@ -107,9 +127,7 @@ struct QuestView: View {
             vm.handleCrownChange(oldValue: oldValue, newValue: newValue, playerProgress: playerProgress)
         }
         .onAppear {
-            if vm.questType == .spin {
-                isCrownFocused = true
-            }
+            isCrownFocused = true
         }
     }
 
@@ -157,6 +175,6 @@ struct QuestView: View {
         } else {
             context.insert(CollectedAnimal(animalID: animal.id))
         }
-        challengeVM.recordCatch(playerProgress: playerProgress)
+        challengeVM.recordCatch(questType: vm.questType, playerProgress: playerProgress)
     }
 }

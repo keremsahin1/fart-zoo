@@ -140,8 +140,41 @@ final class DailyChallengeViewModelTests: XCTestCase {
 
         if let catchIndex = vm.challenges.firstIndex(where: { $0.type == .catchAnimals }) {
             let before = vm.progressValues[catchIndex]
-            vm.recordCatch(playerProgress: progress)
+            vm.recordCatch(questType: .tap, playerProgress: progress)
             XCTAssertEqual(vm.progressValues[catchIndex], before + 1)
+        }
+    }
+
+    func test_record_spin_catch_increments_spin_challenges() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let spinIndex = vm.challenges.firstIndex(where: { $0.type == .spinCatch }) {
+            let before = vm.progressValues[spinIndex]
+            vm.recordCatch(questType: .spin, playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[spinIndex], before + 1)
+        }
+    }
+
+    func test_tap_catch_does_not_increment_spin_challenges() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let spinIndex = vm.challenges.firstIndex(where: { $0.type == .spinCatch }) {
+            let before = vm.progressValues[spinIndex]
+            vm.recordCatch(questType: .tap, playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[spinIndex], before, "Tap catch should not count toward spin challenges")
+        }
+    }
+
+    func test_record_spin_attempt_increments_spin_master() {
+        let progress = makeProgress()
+        let vm = DailyChallengeViewModel(playerProgress: progress)
+
+        if let masterIndex = vm.challenges.firstIndex(where: { $0.type == .spinMaster }) {
+            let before = vm.progressValues[masterIndex]
+            vm.recordSpinAttempt(playerProgress: progress)
+            XCTAssertEqual(vm.progressValues[masterIndex], before + 1)
         }
     }
 

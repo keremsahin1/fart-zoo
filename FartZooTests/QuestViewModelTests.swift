@@ -92,19 +92,19 @@ final class QuestViewModelTests: XCTestCase {
 
     // MARK: - Spin Targets
 
-    func test_spin_target_common_is_50() {
+    func test_spin_target_common_is_500() {
         let vm = QuestViewModel(animal: commonAnimal)
-        XCTAssertEqual(vm.spinTarget, 50)
+        XCTAssertEqual(vm.spinTarget, 500)
     }
 
-    func test_spin_target_legendary_is_250() {
+    func test_spin_target_legendary_is_2500() {
         let vm = QuestViewModel(animal: legendaryAnimal)
-        XCTAssertEqual(vm.spinTarget, 250)
+        XCTAssertEqual(vm.spinTarget, 2500)
     }
 
-    func test_spin_target_extinct_is_400() {
+    func test_spin_target_extinct_is_4000() {
         let vm = QuestViewModel(animal: extinctAnimal)
-        XCTAssertEqual(vm.spinTarget, 400)
+        XCTAssertEqual(vm.spinTarget, 4000)
     }
 
     func test_spin_target_increases_with_rarity() {
@@ -351,8 +351,8 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_progress_fraction_spin() {
         let vm = makeSpinVM()
-        vm.spinProgress = 25
-        XCTAssertEqual(vm.progress, 0.5, accuracy: 0.01) // 25/50
+        vm.spinProgress = 250
+        XCTAssertEqual(vm.progress, 0.5, accuracy: 0.01) // 250/500
     }
 
     func test_progressText_tap() {
@@ -363,8 +363,8 @@ final class QuestViewModelTests: XCTestCase {
 
     func test_progressText_spin() {
         let vm = makeSpinVM()
-        vm.spinProgress = 30
-        XCTAssertEqual(vm.progressText, "30 / 50")
+        vm.spinProgress = 300
+        XCTAssertEqual(vm.progressText, "300 / 500")
     }
 
     // MARK: - Rarity Scaling

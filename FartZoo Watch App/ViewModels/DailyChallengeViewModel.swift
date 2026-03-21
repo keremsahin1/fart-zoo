@@ -40,12 +40,31 @@ class DailyChallengeViewModel {
         record(type: .teleport, playerProgress: playerProgress)
     }
 
-    func recordCatch(playerProgress: PlayerProgress) {
+    func recordCatch(questType: QuestType, playerProgress: PlayerProgress) {
         record(type: .catchAnimals, playerProgress: playerProgress)
+        if questType == .spin {
+            record(type: .spinCatch, playerProgress: playerProgress)
+        }
+        recordWinWithBoth(questType: questType, playerProgress: playerProgress)
+    }
+
+    func recordSpinAttempt(playerProgress: PlayerProgress) {
+        record(type: .spinMaster, playerProgress: playerProgress)
     }
 
     func recordHybrid(playerProgress: PlayerProgress) {
         record(type: .makeHybrid, playerProgress: playerProgress)
+    }
+
+    private var hasWonWithTap = false
+    private var hasWonWithSpin = false
+
+    private func recordWinWithBoth(questType: QuestType, playerProgress: PlayerProgress) {
+        if questType == .tap { hasWonWithTap = true }
+        if questType == .spin { hasWonWithSpin = true }
+        if hasWonWithTap && hasWonWithSpin {
+            record(type: .winWithBoth, playerProgress: playerProgress)
+        }
     }
 
     private func record(type: DailyChallengeType, playerProgress: PlayerProgress) {

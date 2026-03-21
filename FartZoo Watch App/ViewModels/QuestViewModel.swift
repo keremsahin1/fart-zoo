@@ -48,11 +48,11 @@ class QuestViewModel {
 
     var spinTarget: Double {
         switch animal.rarity {
-        case .common:    return 50
-        case .uncommon:  return 100
-        case .rare:      return 175
-        case .legendary: return 250
-        case .extinct:   return 400
+        case .common:    return 500
+        case .uncommon:  return 1000
+        case .rare:      return 1750
+        case .legendary: return 2500
+        case .extinct:   return 4000
         }
     }
 

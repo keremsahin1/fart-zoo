@@ -36,6 +36,12 @@ final class QuestViewModelTests: XCTestCase {
         return vm
     }
 
+    private func makeTimingVM(animal: AnimalDefinition? = nil) -> QuestViewModel {
+        let vm = QuestViewModel(animal: animal ?? commonAnimal)
+        vm.chooseQuest(.timing)
+        return vm
+    }
+
     // MARK: - Initial State
 
     func test_initial_state_is_choosingQuest() {
@@ -70,7 +76,7 @@ final class QuestViewModelTests: XCTestCase {
     }
 
     func test_questType_allCases_count() {
-        XCTAssertEqual(QuestType.allCases.count, 2)
+        XCTAssertEqual(QuestType.allCases.count, 3)
     }
 
     // MARK: - Tap Targets
@@ -394,5 +400,134 @@ final class QuestViewModelTests: XCTestCase {
 
         XCTAssertLessThan(commonVM.timeLimit, legendaryVM.timeLimit)
         XCTAssertLessThan(legendaryVM.timeLimit, extinctVM.timeLimit)
+    }
+
+    // MARK: - Timing Quest
+
+    func test_timing_target_common_is_5() {
+        let vm = QuestViewModel(animal: commonAnimal)
+        XCTAssertEqual(vm.timingTarget, 5)
+    }
+
+    func test_timing_target_extinct_is_20() {
+        let vm = QuestViewModel(animal: extinctAnimal)
+        XCTAssertEqual(vm.timingTarget, 20)
+    }
+
+    func test_timing_target_increases_with_rarity() {
+        let commonVM = QuestViewModel(animal: commonAnimal)
+        let legendaryVM = QuestViewModel(animal: legendaryAnimal)
+        let extinctVM = QuestViewModel(animal: extinctAnimal)
+
+        XCTAssertLessThan(commonVM.timingTarget, legendaryVM.timingTarget)
+        XCTAssertLessThan(legendaryVM.timingTarget, extinctVM.timingTarget)
+    }
+
+    func test_timing_visible_duration_decreases_with_rarity() {
+        let commonVM = QuestViewModel(animal: commonAnimal)
+        let extinctVM = QuestViewModel(animal: extinctAnimal)
+
+        XCTAssertGreaterThan(commonVM.visibleDuration, extinctVM.visibleDuration)
+    }
+
+    func test_timing_hidden_duration_increases_with_rarity() {
+        let commonVM = QuestViewModel(animal: commonAnimal)
+        let extinctVM = QuestViewModel(animal: extinctAnimal)
+
+        XCTAssertLessThan(commonVM.hiddenDuration, extinctVM.hiddenDuration)
+    }
+
+    func test_timing_tap_when_visible_increments() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isAnimalVisible = true
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 1)
+    }
+
+    func test_timing_tap_when_hidden_decrements() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isAnimalVisible = true
+        vm.timingTap(playerProgress: progress) // tapCount = 1
+        vm.isAnimalVisible = false
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0)
+    }
+
+    func test_timing_tap_when_hidden_does_not_go_below_zero() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isAnimalVisible = false
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0)
+    }
+
+    func test_timing_reaching_target_wins() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isAnimalVisible = true
+
+        let coinsAfterStart = progress.coins
+        for _ in 0..<vm.timingTarget {
+            vm.timingTap(playerProgress: progress)
+        }
+
+        XCTAssertEqual(vm.state, .won)
+        XCTAssertEqual(progress.coins, coinsAfterStart + commonAnimal.rarity.coinReward)
+    }
+
+    func test_timing_tap_ignored_when_not_in_progress() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0)
+    }
+
+    func test_timing_tap_ignored_for_tap_quest() {
+        let progress = makeProgress()
+        let vm = makeTapVM()
+        vm.startQuest(playerProgress: progress)
+
+        vm.timingTap(playerProgress: progress)
+        XCTAssertEqual(vm.tapCount, 0, "timingTap should be ignored for tap quest")
+    }
+
+    func test_timing_progress_fraction() {
+        let vm = makeTimingVM()
+        vm.tapCount = 3
+        XCTAssertEqual(vm.progress, 3.0 / 5.0, accuracy: 0.01)
+    }
+
+    func test_timing_progressText() {
+        let vm = makeTimingVM()
+        vm.tapCount = 3
+        XCTAssertEqual(vm.progressText, "3 / 5")
+    }
+
+    func test_timing_starts_with_animal_visible() {
+        let progress = makeProgress()
+        let vm = makeTimingVM()
+        vm.startQuest(playerProgress: progress)
+
+        XCTAssertTrue(vm.isAnimalVisible)
+    }
+
+    func test_questType_allCases_includes_timing() {
+        XCTAssertEqual(QuestType.allCases.count, 3)
+        XCTAssertTrue(QuestType.allCases.contains(.timing))
+    }
+
+    func test_timing_quest_type_properties() {
+        XCTAssertEqual(QuestType.timing.label, "TIMING!")
+        XCTAssertEqual(QuestType.timing.emoji, "👀")
     }
 }

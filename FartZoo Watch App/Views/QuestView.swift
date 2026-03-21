@@ -78,10 +78,10 @@ struct QuestView: View {
 
     private var inProgressView: some View {
         Group {
-            if vm.questType == .tap {
-                tapQuestView
-            } else {
-                spinQuestView
+            switch vm.questType {
+            case .tap:    tapQuestView
+            case .spin:   spinQuestView
+            case .timing: timingQuestView
             }
         }
     }
@@ -128,6 +128,24 @@ struct QuestView: View {
         }
         .onAppear {
             isCrownFocused = true
+        }
+    }
+
+    private var timingQuestView: some View {
+        VStack(spacing: 4) {
+            Text(vm.isAnimalVisible ? animal.emoji : "💨")
+                .font(.largeTitle)
+                .animation(.easeInOut(duration: 0.15), value: vm.isAnimalVisible)
+            ProgressView(value: min(vm.progress, 1.0))
+            Text(vm.progressText).font(.headline)
+            Text(String(format: "\u{23F1} %.1fs", max(vm.timeRemaining, 0)))
+                .font(.caption)
+                .foregroundStyle(vm.isTimeWarning ? .red : .primary)
+            Button(vm.isAnimalVisible ? "TAP!" : "WAIT...") {
+                vm.timingTap(playerProgress: playerProgress)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(vm.isAnimalVisible ? .green : .gray)
         }
     }
 

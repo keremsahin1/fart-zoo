@@ -6,6 +6,7 @@ struct QuestView: View {
     let animal: AnimalDefinition
     let playerProgress: PlayerProgress
     @State private var vm: QuestViewModel
+    @State private var flipRotation: Double = 0
     @FocusState private var isCrownFocused: Bool
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -40,7 +41,7 @@ struct QuestView: View {
             Text(animal.emoji).font(.largeTitle)
             Text(animal.name).font(.headline)
             Text("Choose your quest:").font(.caption).foregroundStyle(.secondary)
-            HStack(spacing: 8) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
                 ForEach(QuestType.allCases, id: \.self) { type in
                     Button {
                         vm.chooseQuest(type)
@@ -85,7 +86,7 @@ struct QuestView: View {
             case .tap:      tapQuestView
             case .spin:     spinQuestView
             case .timing:   timingQuestView
-            case .coinFlip: Text("")
+            case .coinFlip: coinFlipQuestView
             }
         }
     }
@@ -150,6 +151,58 @@ struct QuestView: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(vm.isAnimalVisible ? .green : .gray)
+        }
+    }
+
+    private var coinFlipQuestView: some View {
+        Group {
+            if vm.isFlipping {
+                coinFlipFlippingView
+            } else {
+                coinFlipReadyView
+            }
+        }
+        .focusable()
+        .focused($isCrownFocused)
+        .digitalCrownRotation(
+            $vm.crownRotation,
+            from: -100000, through: 100000,
+            sensitivity: .high,
+            isContinuous: true
+        )
+        .onChange(of: vm.crownRotation) { oldValue, newValue in
+            vm.handleCrownChange(oldValue: oldValue, newValue: newValue, playerProgress: playerProgress)
+        }
+        .onAppear {
+            isCrownFocused = true
+        }
+    }
+
+    private var coinFlipReadyView: some View {
+        VStack(spacing: 6) {
+            Text(animal.emoji).font(.title2)
+            Text(animal.name).font(.headline)
+            Text("🎲").font(.system(size: 44))
+            Text("Spin the crown once!")
+                .font(.caption)
+                .foregroundStyle(.yellow)
+                .fontWeight(.bold)
+        }
+    }
+
+    private var coinFlipFlippingView: some View {
+        VStack(spacing: 8) {
+            Text("🪙")
+                .font(.system(size: 48))
+                .rotationEffect(.degrees(flipRotation))
+                .onAppear {
+                    withAnimation(.linear(duration: 0.15).repeatForever(autoreverses: false)) {
+                        flipRotation = 360
+                    }
+                }
+            Text("Flipping...")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
     }
 

@@ -34,6 +34,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.fartzoo.watchkitapp
         SWIFT_VERSION: 5.9
         WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        CODE_SIGN_ENTITLEMENTS: "FartZoo Watch App/FartZoo_Watch_App.entitlements"
         TARGETED_DEVICE_FAMILY: "4"
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: ""

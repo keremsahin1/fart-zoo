@@ -3,9 +3,9 @@ import Foundation
 
 @Model
 class CollectedAnimal {
-    var animalID: String
-    var count: Int
-    var collectedAt: Date
+    var animalID: String = ""
+    var count: Int = 1
+    var collectedAt: Date = Date()
 
     init(animalID: String) {
         self.animalID = animalID
@@ -16,13 +16,13 @@ class CollectedAnimal {
 
 @Model
 class CollectedHybrid {
-    var hybridID: String
-    var name: String
-    var emoji: String
-    var parent1ID: String
-    var parent2ID: String
-    var count: Int
-    var createdAt: Date
+    var hybridID: String = ""
+    var name: String = ""
+    var emoji: String = ""
+    var parent1ID: String = ""
+    var parent2ID: String = ""
+    var count: Int = 1
+    var createdAt: Date = Date()
 
     init(hybridID: String, name: String, emoji: String, parent1ID: String, parent2ID: String) {
         self.hybridID = hybridID

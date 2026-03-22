@@ -3,11 +3,27 @@ import SwiftData
 
 @main
 struct FartZooApp: App {
+    let container: ModelContainer
+
+    init() {
+        let config = ModelConfiguration(
+            cloudKitDatabase: .private("iCloud.com.fartzoo.watchkitapp")
+        )
+        do {
+            container = try ModelContainer(
+                for: CollectedAnimal.self, CollectedHybrid.self, PlayerProgress.self,
+                configurations: config
+            )
+        } catch {
+            fatalError("Failed to create ModelContainer: \(error)")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: [CollectedAnimal.self, CollectedHybrid.self, PlayerProgress.self])
+        .modelContainer(container)
     }
 }
 

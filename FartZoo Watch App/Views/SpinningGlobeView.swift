@@ -1,7 +1,7 @@
 import SwiftUI
 import SceneKit
 
-struct SpinningGlobeView: View {
+enum GlobeSceneCache {
     static let scene: SCNScene = {
         let scene = SCNScene()
         scene.background.contents = UIColor.black
@@ -28,9 +28,11 @@ struct SpinningGlobeView: View {
 
         return scene
     }()
+}
 
+struct SpinningGlobeView: View {
     var body: some View {
-        SceneView(scene: Self.scene, options: [])
+        SceneView(scene: GlobeSceneCache.scene, options: [])
             .frame(width: 80, height: 80)
             .clipShape(Circle())
     }

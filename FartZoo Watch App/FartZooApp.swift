@@ -17,6 +17,7 @@ struct FartZooApp: App {
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
+        Task.detached(priority: .userInitiated) { _ = SpinningGlobeView.scene }
     }
 
     var body: some Scene {

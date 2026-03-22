@@ -87,7 +87,6 @@ struct ZooView: View {
                 }
             }
             .navigationTitle("Fart Zoo")
-            .task(priority: .background) { _ = SpinningGlobeView.scene }
             .sheet(isPresented: $showTeleport) {
                 TeleportView(playerProgress: playerProgress)
             }

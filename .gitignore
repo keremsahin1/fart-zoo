@@ -8,3 +8,4 @@ xcuserdata/
 Pods/
 *.ipa
 build/
+.superpowers/

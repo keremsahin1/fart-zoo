@@ -76,7 +76,7 @@ final class QuestViewModelTests: XCTestCase {
     }
 
     func test_questType_allCases_count() {
-        XCTAssertEqual(QuestType.allCases.count, 3)
+        XCTAssertEqual(QuestType.allCases.count, 4)
     }
 
     // MARK: - Tap Targets
@@ -522,7 +522,7 @@ final class QuestViewModelTests: XCTestCase {
     }
 
     func test_questType_allCases_includes_timing() {
-        XCTAssertEqual(QuestType.allCases.count, 3)
+        XCTAssertEqual(QuestType.allCases.count, 4)
         XCTAssertTrue(QuestType.allCases.contains(.timing))
     }
 

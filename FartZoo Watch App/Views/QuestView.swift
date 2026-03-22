@@ -82,9 +82,10 @@ struct QuestView: View {
     private var inProgressView: some View {
         Group {
             switch vm.questType {
-            case .tap:    tapQuestView
-            case .spin:   spinQuestView
-            case .timing: timingQuestView
+            case .tap:      tapQuestView
+            case .spin:     spinQuestView
+            case .timing:   timingQuestView
+            case .coinFlip: Text("")
             }
         }
     }

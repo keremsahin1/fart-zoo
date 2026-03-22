@@ -10,28 +10,32 @@ enum QuestType: String, CaseIterable {
     case tap
     case spin
     case timing
+    case coinFlip
 
     var label: String {
         switch self {
-        case .tap:    return "TAP!"
-        case .spin:   return "SPIN!"
-        case .timing: return "TIME!"
+        case .tap:      return "TAP!"
+        case .spin:     return "SPIN!"
+        case .timing:   return "TIME!"
+        case .coinFlip: return "FLIP!"
         }
     }
 
     var emoji: String {
         switch self {
-        case .tap:    return "👆"
-        case .spin:   return "🌀"
-        case .timing: return "👀"
+        case .tap:      return "👆"
+        case .spin:     return "🌀"
+        case .timing:   return "👀"
+        case .coinFlip: return "🪙"
         }
     }
 
     var hint: String {
         switch self {
-        case .tap:    return "Tap as fast as you can!"
-        case .spin:   return "Spin the Digital Crown!"
-        case .timing: return "Tap the animal!\nDon't tap the fart cloud!"
+        case .tap:      return "Tap as fast as you can!"
+        case .spin:     return "Spin the Digital Crown!"
+        case .timing:   return "Tap the animal!\nDon't tap the fart cloud!"
+        case .coinFlip: return "Pure luck — spin to flip!"
         }
     }
 }
@@ -113,17 +117,19 @@ class QuestViewModel {
 
     var progress: Double {
         switch questType {
-        case .tap:    return Double(tapCount) / Double(tapTarget)
-        case .spin:   return spinProgress / spinTarget
-        case .timing: return Double(tapCount) / Double(timingTarget)
+        case .tap:      return Double(tapCount) / Double(tapTarget)
+        case .spin:     return spinProgress / spinTarget
+        case .timing:   return Double(tapCount) / Double(timingTarget)
+        case .coinFlip: return 0.0
         }
     }
 
     var progressText: String {
         switch questType {
-        case .tap:    return "\(tapCount) / \(tapTarget)"
-        case .spin:   return "\(Int(spinProgress)) / \(Int(spinTarget))"
-        case .timing: return "\(tapCount) / \(timingTarget)"
+        case .tap:      return "\(tapCount) / \(tapTarget)"
+        case .spin:     return "\(Int(spinProgress)) / \(Int(spinTarget))"
+        case .timing:   return "\(tapCount) / \(timingTarget)"
+        case .coinFlip: return ""
         }
     }
 

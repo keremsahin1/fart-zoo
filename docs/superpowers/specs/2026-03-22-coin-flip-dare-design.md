@@ -38,14 +38,21 @@ No countdown timer runs during a coinFlip quest.
 var isFlipping: Bool = false
 ```
 
+**`startQuest` — two additional changes:**
+- Reset `isFlipping = false` alongside the existing resets (`tapCount`, `spinProgress`, etc.)
+- Skip the countdown timer: wrap the existing `timer = Timer.scheduledTimer(...)` block in `if questType != .coinFlip { ... }`
+
 **`handleCrownChange` — new branch:**
-When `questType == .coinFlip` and `state == .inProgress` and `!isFlipping`, any crown delta above a small threshold (reuse existing `> 0.01` guard) triggers:
+When `questType == .coinFlip` and `state == .inProgress` and `!isFlipping`, any crown delta above the existing `> 0.01` threshold triggers:
 1. Set `isFlipping = true`
 2. Play haptic: `WKInterfaceDevice.current().play(.click)`
-3. After 1.5s delay, call `win()` or `fail()` based on `Bool.random()`
+3. After 1.5s delay (via `DispatchQueue.main.asyncAfter(deadline:execute:)`), capture `playerProgress` from the function parameter. Inside the closure, guard `state == .inProgress`, then call `win(playerProgress: playerProgress)` or `fail()` based on `Bool.random()`
 
-**No changes needed to:**
-- `tapTarget`, `spinTarget`, `timingTarget`, `timeLimit`, `progress`, `progressText` — these are irrelevant for coinFlip and the view simply won't render them for this quest type
+**`progress` and `progressText` — add coinFlip case:**
+Both computed properties are exhaustive switches on `questType`. Add `.coinFlip` returning `0.0` and `""` respectively.
+
+**Daily challenges:**
+coinFlip catches call the existing `recordCatch(questType:playerProgress:)` unchanged. They count toward `.catchAnimals` challenges only. No new `DailyChallengeType` case is introduced.
 
 **`QuestType` additions:**
 ```swift
@@ -67,6 +74,7 @@ var hint: String   // "Pure luck — spin to flip!"
 - Large 🎲 emoji center screen
 - `"Spin the crown once!"` instruction
 - No progress bar, no timer
+- Crown focus wiring (mirroring the spin quest): `.focusable()`, `.focused($isCrownFocused)`, `.digitalCrownRotation(detent:)` binding `vm.crownRotation`, and `.onAppear { isCrownFocused = true }`
 
 ### Screen 2 — Flipping (`inProgress`, `isFlipping == true`)
 - 🪙 emoji with continuous `rotationEffect` animation (`.linear(duration: 0.15).repeatForever()`)
@@ -75,8 +83,12 @@ var hint: String   // "Pure luck — spin to flip!"
 ### Screen 3 — Result (`won` / `lost`)
 - Reuses existing result screens unchanged (green CAUGHT / red MISSED)
 
+### `inProgressView` switch (`QuestView`)
+- The existing `switch vm.questType` in `inProgressView` handles `.tap`, `.spin`, `.timing` — add a `.coinFlip` branch showing Screens 1 and 2 above (branching on `vm.isFlipping`)
+
 ### Quest picker (`choosingQuest`)
 - coinFlip appears as a 4th option: `"🪙 FLIP!"` with hint `"Pure luck — spin to flip!"`
+- The picker uses `ForEach(QuestType.allCases, ...)` so the new case appears automatically. With 4 items the existing horizontal `HStack` layout may be tight on a 42mm watch face — switch to a 2×2 grid or wrap layout if the buttons overflow
 
 ---
 
@@ -89,5 +101,6 @@ var hint: String   // "Pure luck — spin to flip!"
 | `test_coinFlip_no_refund_on_loss` | Coins stay reduced after a loss |
 | `test_coinFlip_state_becomes_inProgress_after_start` | State is `.inProgress` after `startQuest` |
 | `test_coinFlip_isFlipping_set_on_crown_spin` | Any crown delta > 0.01 sets `isFlipping = true` |
+| `test_questType_allCases_count` (update) | Assert `QuestType.allCases.count == 4` — update both occurrences in `QuestViewModelTests.swift` (`test_questType_allCases_count` and `test_questType_allCases_includes_timing`) |
 
 `Bool.random()` outcomes are non-deterministic; tests cover state transitions and coin math, not win/loss results.

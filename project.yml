@@ -35,6 +35,7 @@ targets:
         SWIFT_VERSION: 5.9
         WATCHOS_DEPLOYMENT_TARGET: "10.0"
         CODE_SIGN_ENTITLEMENTS: "FartZoo Watch App/FartZoo_Watch_App.entitlements"
+        CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
         TARGETED_DEVICE_FAMILY: "4"
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: ""

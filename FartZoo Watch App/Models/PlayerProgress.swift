@@ -37,9 +37,9 @@ class CollectedHybrid {
 
 @Model
 class PlayerProgress {
-    var coins: Int
-    var lastDailyChallengeDate: Date?
-    var dailyChallengesCompletedMask: Int  // bitmask: bit i set = challenge i completed today
+    var coins: Int = 50
+    var lastDailyChallengeDate: Date? = nil
+    var dailyChallengesCompletedMask: Int = 0  // bitmask: bit i set = challenge i completed today
 
     init() {
         self.coins = 50

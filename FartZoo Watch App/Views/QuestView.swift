@@ -182,7 +182,7 @@ struct QuestView: View {
         VStack(spacing: 6) {
             Text(animal.emoji).font(.title2)
             Text(animal.name).font(.headline)
-            Text("🎲").font(.system(size: 44))
+            Text("🪙").font(.system(size: 44))
             Text("Spin the crown once!")
                 .font(.caption)
                 .foregroundStyle(.yellow)
@@ -196,6 +196,7 @@ struct QuestView: View {
                 .font(.system(size: 48))
                 .rotationEffect(.degrees(flipRotation))
                 .onAppear {
+                    flipRotation = 0
                     withAnimation(.linear(duration: 0.15).repeatForever(autoreverses: false)) {
                         flipRotation = 360
                     }

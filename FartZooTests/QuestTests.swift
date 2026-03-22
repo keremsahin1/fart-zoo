@@ -116,4 +116,17 @@ final class QuestTests: XCTestCase {
 
         XCTAssertTrue(vm.isFlipping, "isFlipping should be true after any crown movement")
     }
+
+    func test_coinFlip_isFlipping_reset_on_startQuest() {
+        let progress = makeProgress()
+        let vm = makeCoinFlipVM()
+        vm.startQuest(playerProgress: progress)
+        vm.isFlipping = true
+
+        let progress2 = makeProgress()
+        vm.chooseQuest(.coinFlip)
+        vm.startQuest(playerProgress: progress2)
+
+        XCTAssertFalse(vm.isFlipping, "isFlipping must be reset to false when a new quest starts")
+    }
 }

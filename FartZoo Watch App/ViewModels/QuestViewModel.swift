@@ -273,6 +273,7 @@ class QuestViewModel {
     // MARK: - Win / Fail
 
     func win(playerProgress: PlayerProgress) {
+        guard state == .inProgress else { return }
         timer?.invalidate()
         timer = nil
         visibilityTimer?.invalidate()
@@ -283,6 +284,7 @@ class QuestViewModel {
     }
 
     func fail() {
+        guard state == .inProgress else { return }
         timer?.invalidate()
         timer = nil
         visibilityTimer?.invalidate()

@@ -103,4 +103,17 @@ final class QuestTests: XCTestCase {
 
         XCTAssertEqual(progress.coins, coinsAfterStart, "fail() must not refund the entry cost")
     }
+
+    func test_coinFlip_isFlipping_set_on_crown_spin() {
+        let progress = makeProgress()
+        let vm = makeCoinFlipVM()
+        vm.startQuest(playerProgress: progress)
+        XCTAssertFalse(vm.isFlipping, "isFlipping should start false")
+
+        let oldValue = vm.crownRotation
+        vm.crownRotation = oldValue + 1.0
+        vm.handleCrownChange(oldValue: oldValue, newValue: vm.crownRotation, playerProgress: progress)
+
+        XCTAssertTrue(vm.isFlipping, "isFlipping should be true after any crown movement")
+    }
 }

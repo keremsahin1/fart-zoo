@@ -193,7 +193,26 @@ class QuestViewModel {
     var spinFartInterval: Double { spinTarget / 5 }
 
     func handleCrownChange(oldValue: Double, newValue: Double, playerProgress: PlayerProgress) {
-        guard state == .inProgress, questType == .spin else { return }
+        guard state == .inProgress else { return }
+
+        if questType == .coinFlip {
+            guard !isFlipping else { return }
+            let delta = abs(newValue - oldValue)
+            guard delta > 0.01 else { return }
+            isFlipping = true
+            WKInterfaceDevice.current().play(.click)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self, self.state == .inProgress else { return }
+                if Bool.random() {
+                    self.win(playerProgress: playerProgress)
+                } else {
+                    self.fail()
+                }
+            }
+            return
+        }
+
+        guard questType == .spin else { return }
         let delta = abs(newValue - oldValue)
         guard delta > 0.01 else { return }
         spinProgress += delta

@@ -52,6 +52,7 @@ class QuestViewModel {
     var isAnimalVisible = true
     private var timer: Timer?
     private var visibilityTimer: Timer?
+    var isFlipping: Bool = false
 
     var tapTarget: Int {
         switch animal.rarity {
@@ -153,14 +154,17 @@ class QuestViewModel {
         crownRotation = 0
         lastFartThreshold = 0
         isAnimalVisible = true
+        isFlipping = false
         timeRemaining = timeLimit
         state = .inProgress
 
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
-            guard let self else { return }
-            self.timeRemaining -= 0.1
-            if self.timeRemaining <= 0 {
-                self.fail()
+        if questType != .coinFlip {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+                guard let self else { return }
+                self.timeRemaining -= 0.1
+                if self.timeRemaining <= 0 {
+                    self.fail()
+                }
             }
         }
 
@@ -249,7 +253,7 @@ class QuestViewModel {
 
     // MARK: - Win / Fail
 
-    private func win(playerProgress: PlayerProgress) {
+    func win(playerProgress: PlayerProgress) {
         timer?.invalidate()
         timer = nil
         visibilityTimer?.invalidate()
@@ -259,7 +263,7 @@ class QuestViewModel {
         SoundManager.shared.playVictory()
     }
 
-    private func fail() {
+    func fail() {
         timer?.invalidate()
         timer = nil
         visibilityTimer?.invalidate()

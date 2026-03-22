@@ -42,4 +42,65 @@ final class QuestTests: XCTestCase {
                 "\(rarity) coinReward should be half of coinCost")
         }
     }
+
+    // MARK: - Coin Flip Quest
+
+    private func makeCoinFlipVM(animal: AnimalDefinition? = nil) -> QuestViewModel {
+        let vm = QuestViewModel(animal: animal ?? AnimalDefinition(
+            id: "test_dog", name: "Dog", emoji: "🐕",
+            rarity: .common, location: .farm, soundFile: "fart_common_1"
+        ))
+        vm.chooseQuest(.coinFlip)
+        return vm
+    }
+
+    private func makeProgress(coins: Int = 500) -> PlayerProgress {
+        let p = PlayerProgress()
+        p.coins = coins
+        return p
+    }
+
+    func test_coinFlip_state_becomes_inProgress_after_start() {
+        let progress = makeProgress()
+        let vm = makeCoinFlipVM()
+
+        vm.startQuest(playerProgress: progress)
+
+        XCTAssertEqual(vm.state, .inProgress)
+    }
+
+    func test_coinFlip_deducts_coins_on_start() {
+        let cost = Rarity.common.coinCost
+        let progress = makeProgress(coins: cost + 10)
+        let vm = makeCoinFlipVM()
+
+        vm.startQuest(playerProgress: progress)
+
+        XCTAssertEqual(progress.coins, 10)
+    }
+
+    func test_coinFlip_awards_coins_on_win() {
+        let cost = Rarity.common.coinCost
+        let reward = Rarity.common.coinReward
+        let progress = makeProgress(coins: cost)
+        let vm = makeCoinFlipVM()
+        vm.startQuest(playerProgress: progress)
+        let coinsAfterStart = progress.coins  // 0
+
+        vm.win(playerProgress: progress)
+
+        XCTAssertEqual(progress.coins, coinsAfterStart + reward)
+    }
+
+    func test_coinFlip_no_refund_on_loss() {
+        let cost = Rarity.common.coinCost
+        let progress = makeProgress(coins: cost)
+        let vm = makeCoinFlipVM()
+        vm.startQuest(playerProgress: progress)
+        let coinsAfterStart = progress.coins  // 0
+
+        vm.fail()
+
+        XCTAssertEqual(progress.coins, coinsAfterStart, "fail() must not refund the entry cost")
+    }
 }

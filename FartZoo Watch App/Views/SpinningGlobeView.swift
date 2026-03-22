@@ -2,13 +2,7 @@ import SwiftUI
 import SceneKit
 
 struct SpinningGlobeView: View {
-    var body: some View {
-        SceneView(scene: makeScene(), options: [])
-            .frame(width: 80, height: 80)
-            .clipShape(Circle())
-    }
-
-    private func makeScene() -> SCNScene {
+    static let scene: SCNScene = {
         let scene = SCNScene()
         scene.background.contents = UIColor.black
 
@@ -33,5 +27,11 @@ struct SpinningGlobeView: View {
         scene.rootNode.addChildNode(cameraNode)
 
         return scene
+    }()
+
+    var body: some View {
+        SceneView(scene: Self.scene, options: [])
+            .frame(width: 80, height: 80)
+            .clipShape(Circle())
     }
 }
